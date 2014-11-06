@@ -8,6 +8,20 @@
 
 #import "GADomain.h"
 
-@interface GAClientTag : GADomain
+@interface GAClientTag : GADomain {
+    
+    NSString *id;
+    NSString *clientId;
+    NSString *tagId;
+    NSString *value;
+    NSDate *created;
+    
+}
+
+@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *clientId;
+@property (nonatomic, strong) NSString *tagId;
+@property (nonatomic, strong) NSString *value;
+@property (nonatomic, strong) NSDate *created;
 
 @end
