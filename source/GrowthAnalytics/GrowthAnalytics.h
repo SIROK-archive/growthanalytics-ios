@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GrowthbeatCore.h"
 
 //! Project version number for GrowthAnalytics.
 FOUNDATION_EXPORT double GrowthAnalyticsVersionNumber;
