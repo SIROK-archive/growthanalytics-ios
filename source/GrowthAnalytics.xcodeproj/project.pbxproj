@@ -17,6 +17,12 @@
 		B24051DA1A0B322E00AFECE1 /* GADomain.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051D31A0B322E00AFECE1 /* GADomain.m */; };
 		B24051DB1A0B322E00AFECE1 /* GAService.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051D51A0B322E00AFECE1 /* GAService.m */; };
 		B24051DF1A0B326300AFECE1 /* GrowthbeatCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051DE1A0B326300AFECE1 /* GrowthbeatCore.framework */; };
+		B24052051A0B35EF00AFECE1 /* GAClientEvent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */; };
+		B24052061A0B35EF00AFECE1 /* GAClientEventService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CC1A0B322E00AFECE1 /* GAClientEventService.h */; };
+		B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CE1A0B322E00AFECE1 /* GAClientTag.h */; };
+		B24052081A0B35EF00AFECE1 /* GAClientTagService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D01A0B322E00AFECE1 /* GAClientTagService.h */; };
+		B24052091A0B35EF00AFECE1 /* GADomain.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D21A0B322E00AFECE1 /* GADomain.h */; };
+		B240520A1A0B35EF00AFECE1 /* GAService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D41A0B322E00AFECE1 /* GAService.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +39,15 @@
 		B24051AD1A0B31D300AFECE1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				B24052051A0B35EF00AFECE1 /* GAClientEvent.h in CopyFiles */,
+				B24052061A0B35EF00AFECE1 /* GAClientEventService.h in CopyFiles */,
+				B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */,
+				B24052081A0B35EF00AFECE1 /* GAClientTagService.h in CopyFiles */,
+				B24052091A0B35EF00AFECE1 /* GADomain.h in CopyFiles */,
+				B240520A1A0B35EF00AFECE1 /* GAService.h in CopyFiles */,
 				B24051B31A0B31D300AFECE1 /* GrowthAnalytics.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +185,7 @@
 				B24051AB1A0B31D300AFECE1 /* Sources */,
 				B24051AC1A0B31D300AFECE1 /* Frameworks */,
 				B24051AD1A0B31D300AFECE1 /* CopyFiles */,
+				B24052041A0B349700AFECE1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -245,6 +258,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B24052041A0B349700AFECE1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B24051AB1A0B31D300AFECE1 /* Sources */ = {
@@ -367,6 +396,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -385,6 +415,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
