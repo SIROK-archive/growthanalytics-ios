@@ -12,6 +12,12 @@
 		B251709C1A0AE57D0023CB7E /* GrowthAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */; };
 		B251709D1A0AE57D0023CB7E /* GrowthAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */; };
 		B25170A01A0AF79B0023CB7E /* GrowthbeatCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B251709F1A0AF79B0023CB7E /* GrowthbeatCore.framework */; };
+		B25170A71A0AFB110023CB7E /* GADomain.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170A51A0AFB110023CB7E /* GADomain.h */; };
+		B25170A81A0AFB110023CB7E /* GADomain.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170A61A0AFB110023CB7E /* GADomain.m */; };
+		B25170AB1A0AFB420023CB7E /* GAClientEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170A91A0AFB420023CB7E /* GAClientEvent.h */; };
+		B25170AC1A0AFB420023CB7E /* GAClientEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170AA1A0AFB420023CB7E /* GAClientEvent.m */; };
+		B25170AF1A0AFB4C0023CB7E /* GAClientTag.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170AD1A0AFB4C0023CB7E /* GAClientTag.h */; };
+		B25170B01A0AFB4C0023CB7E /* GAClientTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170AE1A0AFB4C0023CB7E /* GAClientTag.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +39,12 @@
 		B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowthAnalytics.h; sourceTree = "<group>"; };
 		B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowthAnalytics.m; sourceTree = "<group>"; };
 		B251709F1A0AF79B0023CB7E /* GrowthbeatCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthbeatCore.framework; path = "../submodules/growthbeat-core-ios/GrowthbeatCore.framework"; sourceTree = "<group>"; };
+		B25170A51A0AFB110023CB7E /* GADomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADomain.h; sourceTree = "<group>"; };
+		B25170A61A0AFB110023CB7E /* GADomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADomain.m; sourceTree = "<group>"; };
+		B25170A91A0AFB420023CB7E /* GAClientEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientEvent.h; sourceTree = "<group>"; };
+		B25170AA1A0AFB420023CB7E /* GAClientEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientEvent.m; sourceTree = "<group>"; };
+		B25170AD1A0AFB4C0023CB7E /* GAClientTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTag.h; sourceTree = "<group>"; };
+		B25170AE1A0AFB4C0023CB7E /* GAClientTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +89,9 @@
 		B25170801A0AE35D0023CB7E /* GrowthAnalytics */ = {
 			isa = PBXGroup;
 			children = (
+				B25170A31A0AFADB0023CB7E /* Headers */,
+				B25170A41A0AFAE70023CB7E /* Sources */,
 				B25170811A0AE35D0023CB7E /* Supporting Files */,
-				B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */,
-				B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */,
 			);
 			path = GrowthAnalytics;
 			sourceTree = "<group>";
@@ -117,6 +129,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B25170A31A0AFADB0023CB7E /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				B25170A91A0AFB420023CB7E /* GAClientEvent.h */,
+				B25170AD1A0AFB4C0023CB7E /* GAClientTag.h */,
+				B25170A51A0AFB110023CB7E /* GADomain.h */,
+				B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		B25170A41A0AFAE70023CB7E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B25170AA1A0AFB420023CB7E /* GAClientEvent.m */,
+				B25170AE1A0AFB4C0023CB7E /* GAClientTag.m */,
+				B25170A61A0AFB110023CB7E /* GADomain.m */,
+				B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -124,6 +158,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B25170A71A0AFB110023CB7E /* GADomain.h in Headers */,
+				B25170AB1A0AFB420023CB7E /* GAClientEvent.h in Headers */,
+				B25170AF1A0AFB4C0023CB7E /* GAClientTag.h in Headers */,
 				B251709C1A0AE57D0023CB7E /* GrowthAnalytics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +262,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B251709D1A0AE57D0023CB7E /* GrowthAnalytics.m in Sources */,
+				B25170AC1A0AFB420023CB7E /* GAClientEvent.m in Sources */,
+				B25170A81A0AFB110023CB7E /* GADomain.m in Sources */,
+				B25170B01A0AFB4C0023CB7E /* GAClientTag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
