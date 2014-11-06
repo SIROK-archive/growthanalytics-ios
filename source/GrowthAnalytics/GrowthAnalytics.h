@@ -34,5 +34,21 @@ FOUNDATION_EXPORT const unsigned char GrowthAnalyticsVersionString[];
  */
 - (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
 
+/**
+ * Track event
+ *
+ * @param eventId Event ID
+ * @param properties properties for the tracking
+ */
+- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties;
+
+/**
+ * Set tag
+ *
+ * @param tagId Tag ID
+ * @param value value for the tag
+ */
+- (void)setTag:(NSString *)tagId value:(NSString *)value;
+
 @end
 

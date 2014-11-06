@@ -69,4 +69,16 @@ static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferen
     
 }
 
+- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties {
+    
+    // TODO Implement API request
+    
+}
+
+- (void)setTag:(NSString *)tagId value:(NSString *)value {
+    
+    // TODO Implement API request
+    
+}
+
 @end
