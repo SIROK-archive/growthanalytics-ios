@@ -50,5 +50,9 @@ FOUNDATION_EXPORT const unsigned char GrowthAnalyticsVersionString[];
  */
 - (void)setTag:(NSString *)tagId value:(NSString *)value;
 
+- (GBLogger *)logger;
+- (GBHttpClient *)httpClient;
+- (GBPreference *)preference;
+
 @end
 

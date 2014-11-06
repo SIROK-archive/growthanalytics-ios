@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GrowthbeatCore.h"
 
 @interface GAService : NSObject
+
+- (void)httpRequest:(GBHttpRequest *)httpRequest success:(void(^) (GBHttpResponse * httpResponse)) success fail:(void(^) (GBHttpResponse * httpResponse))fail;
 
 @end
