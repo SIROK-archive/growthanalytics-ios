@@ -17,3 +17,13 @@ FOUNDATION_EXPORT const unsigned char GrowthAnalyticsVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <GrowthAnalytics/PublicHeader.h>
 
 
+@interface GrowthAnalytics : NSObject
+
+/**
+ * Get shared instance of GrowthAnalytics
+ *
+ */
++ (GrowthAnalytics *) sharedInstance;
+
+@end
+

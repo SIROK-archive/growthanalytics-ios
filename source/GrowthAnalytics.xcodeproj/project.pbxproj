@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B25170841A0AE35D0023CB7E /* GrowthAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170831A0AE35D0023CB7E /* GrowthAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B251708A1A0AE35D0023CB7E /* GrowthAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B251707E1A0AE35D0023CB7E /* GrowthAnalytics.framework */; };
 		B25170911A0AE35D0023CB7E /* GrowthAnalyticsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170901A0AE35D0023CB7E /* GrowthAnalyticsTests.m */; };
+		B251709C1A0AE57D0023CB7E /* GrowthAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */; };
+		B251709D1A0AE57D0023CB7E /* GrowthAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,10 +26,11 @@
 /* Begin PBXFileReference section */
 		B251707E1A0AE35D0023CB7E /* GrowthAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GrowthAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25170821A0AE35D0023CB7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B25170831A0AE35D0023CB7E /* GrowthAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrowthAnalytics.h; sourceTree = "<group>"; };
 		B25170891A0AE35D0023CB7E /* GrowthAnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowthAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B251708F1A0AE35D0023CB7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B25170901A0AE35D0023CB7E /* GrowthAnalyticsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrowthAnalyticsTests.m; sourceTree = "<group>"; };
+		B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowthAnalytics.h; sourceTree = "<group>"; };
+		B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowthAnalytics.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +73,9 @@
 		B25170801A0AE35D0023CB7E /* GrowthAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				B25170831A0AE35D0023CB7E /* GrowthAnalytics.h */,
 				B25170811A0AE35D0023CB7E /* Supporting Files */,
+				B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */,
+				B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */,
 			);
 			path = GrowthAnalytics;
 			sourceTree = "<group>";
@@ -109,7 +112,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B25170841A0AE35D0023CB7E /* GrowthAnalytics.h in Headers */,
+				B251709C1A0AE57D0023CB7E /* GrowthAnalytics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B251709D1A0AE57D0023CB7E /* GrowthAnalytics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +398,7 @@
 				B25170961A0AE35D0023CB7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B25170971A0AE35D0023CB7E /* Build configuration list for PBXNativeTarget "GrowthAnalyticsTests" */ = {
 			isa = XCConfigurationList;
@@ -402,6 +407,7 @@
 				B25170991A0AE35D0023CB7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
