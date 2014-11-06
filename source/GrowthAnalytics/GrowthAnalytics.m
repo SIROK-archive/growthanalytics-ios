@@ -17,12 +17,16 @@ static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferen
     GBLogger *logger;
     GBHttpClient *httpClient;
     GBPreference *preference;
+    NSString *applicationId;
+    NSString *credentialId;
     
 }
 
 @property (nonatomic, strong) GBLogger *logger;
 @property (nonatomic, strong) GBHttpClient *httpClient;
 @property (nonatomic, strong) GBPreference *preference;
+@property (nonatomic, strong) NSString *applicationId;
+@property (nonatomic, strong) NSString *credentialId;
 
 @end
 
@@ -31,6 +35,8 @@ static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferen
 @synthesize logger;
 @synthesize httpClient;
 @synthesize preference;
+@synthesize applicationId;
+@synthesize credentialId;
 
 + (GrowthAnalytics *) sharedInstance {
     @synchronized(self) {
@@ -52,6 +58,15 @@ static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferen
         self.preference = [[GBPreference alloc] initWithFileName:kGPPreferenceDefaultFileName];
     }
     return self;
+}
+
+- (void)initializeWithApplicationId:(NSString *)newApplicationId credentialId:(NSString *)newCredentialId {
+    
+    self.applicationId = newApplicationId;
+    self.credentialId = newCredentialId;
+    
+    [GrowthbeatCore initializeWithApplicationId:applicationId credentialId:credentialId];
+    
 }
 
 @end

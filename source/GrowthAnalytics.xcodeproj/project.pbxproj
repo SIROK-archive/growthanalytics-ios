@@ -285,7 +285,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../submodules/growthbeat-core-ios/source/GrowthbeatCore/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -329,7 +328,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../submodules/growthbeat-core-ios/source/GrowthbeatCore/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -353,6 +351,11 @@
 					"$(SRCROOT)/../submodules/growthbeat-core-ios",
 					"$(SRCROOT)/../submodules/growthbeat-core-ios/source/GrowthbeatCore/",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../submodules/growthbeat-core-ios/source/GrowthbeatCore/",
+				);
 				INFOPLIST_FILE = GrowthAnalytics/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -371,6 +374,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../submodules/growthbeat-core-ios",
+					"$(SRCROOT)/../submodules/growthbeat-core-ios/source/GrowthbeatCore/",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../submodules/growthbeat-core-ios/source/GrowthbeatCore/",
 				);
 				INFOPLIST_FILE = GrowthAnalytics/Info.plist;

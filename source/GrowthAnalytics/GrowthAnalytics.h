@@ -26,5 +26,13 @@ FOUNDATION_EXPORT const unsigned char GrowthAnalyticsVersionString[];
  */
 + (GrowthAnalytics *) sharedInstance;
 
+/**
+ * Initialize GrowthAnalytics instance
+ *
+ * @param applicationId Application ID
+ * @param credentialId Credential ID for the application
+ */
+- (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
+
 @end
 
