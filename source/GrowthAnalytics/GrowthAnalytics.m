@@ -7,6 +7,8 @@
 //
 
 #import "GrowthAnalytics.h"
+#import "GAClientEventService.h"
+#import "GAClientTagService.h"
 
 static GrowthAnalytics *sharedInstance = nil;
 static NSString *const kGPBaseUrl = @"https://api.analytics.growthbeat.com/";
@@ -71,13 +73,25 @@ static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferen
 
 - (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties {
     
-    // TODO Implement API request
+    [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
+    
+    [[GAClientEventService sharedInstance] createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties success:^(GAClientEvent *clientEvent) {
+        [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
+    } fail:^(NSInteger status, NSError *error) {
+        [logger info:@"Tracking event fail. %@", error];
+    }];
     
 }
 
 - (void)setTag:(NSString *)tagId value:(NSString *)value {
     
-    // TODO Implement API request
+    [logger info:@"Set tag... (tagId: %@, value: %@)", tagId, value];
+    
+    [[GAClientTagService sharedInstance] createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] tagId:tagId value:value success:^(GAClientTag *clientTag) {
+        [logger info:@"Setting tag success. (clientTagId: %@)", clientTag.id];
+    } fail:^(NSInteger status, NSError *error) {
+        [logger info:@"Setting tag fail. %@", error];
+    }];
     
 }
 
