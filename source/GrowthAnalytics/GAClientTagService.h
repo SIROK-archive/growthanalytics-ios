@@ -7,7 +7,11 @@
 //
 
 #import "GAService.h"
+#import "GAClientTag.h"
 
 @interface GAClientTagService : GAService
+
++ (GAClientTagService *)sharedInstance;
+- (void)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value success:(void(^) (GAClientTag * clientTag)) success fail:(void(^) (NSInteger status, NSError * error))fail;
 
 @end

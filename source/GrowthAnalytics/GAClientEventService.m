@@ -8,7 +8,6 @@
 
 #import "GAClientEventService.h"
 
-
 static GAClientEventService *sharedInstance = nil;
 
 @implementation GAClientEventService
@@ -44,9 +43,9 @@ static GAClientEventService *sharedInstance = nil;
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
     
     [self httpRequest:httpRequest success:^(GBHttpResponse *httpResponse) {
-        GAClientEvent *event = [GAClientEvent domainWithDictionary:httpResponse.body];
+        GAClientEvent *clientEvent = [GAClientEvent domainWithDictionary:httpResponse.body];
         if (success) {
-            success(event);
+            success(clientEvent);
         }
     } fail:^(GBHttpResponse *httpResponse) {
         if (fail) {
