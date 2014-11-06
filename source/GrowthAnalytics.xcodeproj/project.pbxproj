@@ -18,6 +18,12 @@
 		B25170AC1A0AFB420023CB7E /* GAClientEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170AA1A0AFB420023CB7E /* GAClientEvent.m */; };
 		B25170AF1A0AFB4C0023CB7E /* GAClientTag.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170AD1A0AFB4C0023CB7E /* GAClientTag.h */; };
 		B25170B01A0AFB4C0023CB7E /* GAClientTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170AE1A0AFB4C0023CB7E /* GAClientTag.m */; };
+		B25170B31A0AFDAD0023CB7E /* GAService.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170B11A0AFDAD0023CB7E /* GAService.h */; };
+		B25170B41A0AFDAD0023CB7E /* GAService.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170B21A0AFDAD0023CB7E /* GAService.m */; };
+		B25170B71A0AFDBD0023CB7E /* GAClientEventService.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170B51A0AFDBD0023CB7E /* GAClientEventService.h */; };
+		B25170B81A0AFDBD0023CB7E /* GAClientEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170B61A0AFDBD0023CB7E /* GAClientEventService.m */; };
+		B25170BB1A0AFDCC0023CB7E /* GAClientTagService.h in Headers */ = {isa = PBXBuildFile; fileRef = B25170B91A0AFDCC0023CB7E /* GAClientTagService.h */; };
+		B25170BC1A0AFDCC0023CB7E /* GAClientTagService.m in Sources */ = {isa = PBXBuildFile; fileRef = B25170BA1A0AFDCC0023CB7E /* GAClientTagService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,12 @@
 		B25170AA1A0AFB420023CB7E /* GAClientEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientEvent.m; sourceTree = "<group>"; };
 		B25170AD1A0AFB4C0023CB7E /* GAClientTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTag.h; sourceTree = "<group>"; };
 		B25170AE1A0AFB4C0023CB7E /* GAClientTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTag.m; sourceTree = "<group>"; };
+		B25170B11A0AFDAD0023CB7E /* GAService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAService.h; sourceTree = "<group>"; };
+		B25170B21A0AFDAD0023CB7E /* GAService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAService.m; sourceTree = "<group>"; };
+		B25170B51A0AFDBD0023CB7E /* GAClientEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientEventService.h; sourceTree = "<group>"; };
+		B25170B61A0AFDBD0023CB7E /* GAClientEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientEventService.m; sourceTree = "<group>"; };
+		B25170B91A0AFDCC0023CB7E /* GAClientTagService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTagService.h; sourceTree = "<group>"; };
+		B25170BA1A0AFDCC0023CB7E /* GAClientTagService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTagService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +145,11 @@
 			isa = PBXGroup;
 			children = (
 				B25170A91A0AFB420023CB7E /* GAClientEvent.h */,
+				B25170B51A0AFDBD0023CB7E /* GAClientEventService.h */,
 				B25170AD1A0AFB4C0023CB7E /* GAClientTag.h */,
+				B25170B91A0AFDCC0023CB7E /* GAClientTagService.h */,
 				B25170A51A0AFB110023CB7E /* GADomain.h */,
+				B25170B11A0AFDAD0023CB7E /* GAService.h */,
 				B251709A1A0AE57D0023CB7E /* GrowthAnalytics.h */,
 			);
 			name = Headers;
@@ -144,8 +159,11 @@
 			isa = PBXGroup;
 			children = (
 				B25170AA1A0AFB420023CB7E /* GAClientEvent.m */,
+				B25170B61A0AFDBD0023CB7E /* GAClientEventService.m */,
 				B25170AE1A0AFB4C0023CB7E /* GAClientTag.m */,
+				B25170BA1A0AFDCC0023CB7E /* GAClientTagService.m */,
 				B25170A61A0AFB110023CB7E /* GADomain.m */,
+				B25170B21A0AFDAD0023CB7E /* GAService.m */,
 				B251709B1A0AE57D0023CB7E /* GrowthAnalytics.m */,
 			);
 			name = Sources;
@@ -158,10 +176,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B25170B71A0AFDBD0023CB7E /* GAClientEventService.h in Headers */,
 				B25170A71A0AFB110023CB7E /* GADomain.h in Headers */,
 				B25170AB1A0AFB420023CB7E /* GAClientEvent.h in Headers */,
 				B25170AF1A0AFB4C0023CB7E /* GAClientTag.h in Headers */,
 				B251709C1A0AE57D0023CB7E /* GrowthAnalytics.h in Headers */,
+				B25170B31A0AFDAD0023CB7E /* GAService.h in Headers */,
+				B25170BB1A0AFDCC0023CB7E /* GAClientTagService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,9 +283,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B251709D1A0AE57D0023CB7E /* GrowthAnalytics.m in Sources */,
+				B25170B81A0AFDBD0023CB7E /* GAClientEventService.m in Sources */,
 				B25170AC1A0AFB420023CB7E /* GAClientEvent.m in Sources */,
+				B25170BC1A0AFDCC0023CB7E /* GAClientTagService.m in Sources */,
 				B25170A81A0AFB110023CB7E /* GADomain.m in Sources */,
 				B25170B01A0AFB4C0023CB7E /* GAClientTag.m in Sources */,
+				B25170B41A0AFDAD0023CB7E /* GAService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
