@@ -16,7 +16,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [GrowthbeatCore initializeWithApplicationId:@"dy6VlRMnN3juhW9L" credentialId:@"NuvkVhQtRDG2nrNeDzHXzZO5c6j0Xu5t"];
+    [[GrowthAnalytics sharedInstance] initializeWithApplicationId:@"dy6VlRMnN3juhW9L" credentialId:@"NuvkVhQtRDG2nrNeDzHXzZO5c6j0Xu5t"];
     return YES;
 }
 
