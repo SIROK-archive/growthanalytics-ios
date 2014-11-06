@@ -8,6 +8,20 @@
 
 #import "GADomain.h"
 
-@interface GAClientEvent : GADomain
+@interface GAClientEvent : GADomain {
+    
+    NSString *id;
+    NSString *clientId;
+    NSString *eventId;
+    NSDictionary *properties;
+    NSDate *created;
+    
+}
+
+@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *clientId;
+@property (nonatomic, strong) NSString *eventId;
+@property (nonatomic, strong) NSDictionary *properties;
+@property (nonatomic, strong) NSDate *created;
 
 @end
