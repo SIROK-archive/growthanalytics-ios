@@ -11,8 +11,9 @@
 #import "GAClientTag.h"
 
 static GrowthAnalytics *sharedInstance = nil;
-static NSString *const kGPBaseUrl = @"https://api.analytics.growthbeat.com/";
-static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferences";
+static NSString *const kGBLoggerDefaultTag = @"GrowthAnalytics";
+static NSString *const kGBHttpClientDefaultBaseUrl = @"https://api.analytics.growthbeat.com/";
+static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferences";
 
 @interface GrowthAnalytics () {
     
@@ -55,9 +56,9 @@ static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferen
 - (id) init {
     self = [super init];
     if (self) {
-        self.logger = [[GBLogger alloc] initWithTag:@"Growth Analytics"];
-        self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGPBaseUrl]];
-        self.preference = [[GBPreference alloc] initWithFileName:kGPPreferenceDefaultFileName];
+        self.logger = [[GBLogger alloc] initWithTag:kGBLoggerDefaultTag];
+        self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGBHttpClientDefaultBaseUrl]];
+        self.preference = [[GBPreference alloc] initWithFileName:kGBPreferenceDefaultFileName];
     }
     return self;
 }
