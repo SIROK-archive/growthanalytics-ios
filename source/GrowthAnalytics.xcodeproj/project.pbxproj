@@ -26,13 +26,11 @@
 		B24051B51A0B31D300AFECE1 /* GrowthAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051B41A0B31D300AFECE1 /* GrowthAnalytics.m */; };
 		B24051BB1A0B31D300AFECE1 /* libGrowthAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051AF1A0B31D300AFECE1 /* libGrowthAnalytics.a */; };
 		B24051D61A0B322E00AFECE1 /* GAClientEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051CB1A0B322E00AFECE1 /* GAClientEvent.m */; };
-		B24051D71A0B322E00AFECE1 /* GAClientEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051CD1A0B322E00AFECE1 /* GAClientEventService.m */; };
 		B24051D81A0B322E00AFECE1 /* GAClientTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051CF1A0B322E00AFECE1 /* GAClientTag.m */; };
 		B24051D91A0B322E00AFECE1 /* GAClientTagService.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051D11A0B322E00AFECE1 /* GAClientTagService.m */; };
 		B24051DB1A0B322E00AFECE1 /* GAService.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051D51A0B322E00AFECE1 /* GAService.m */; };
 		B24051DF1A0B326300AFECE1 /* GrowthbeatCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051DE1A0B326300AFECE1 /* GrowthbeatCore.framework */; };
 		B24052051A0B35EF00AFECE1 /* GAClientEvent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */; };
-		B24052061A0B35EF00AFECE1 /* GAClientEventService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CC1A0B322E00AFECE1 /* GAClientEventService.h */; };
 		B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CE1A0B322E00AFECE1 /* GAClientTag.h */; };
 		B24052081A0B35EF00AFECE1 /* GAClientTagService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D01A0B322E00AFECE1 /* GAClientTagService.h */; };
 		B240520A1A0B35EF00AFECE1 /* GAService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D41A0B322E00AFECE1 /* GAService.h */; };
@@ -63,7 +61,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				B24052051A0B35EF00AFECE1 /* GAClientEvent.h in CopyFiles */,
-				B24052061A0B35EF00AFECE1 /* GAClientEventService.h in CopyFiles */,
 				B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */,
 				B24052081A0B35EF00AFECE1 /* GAClientTagService.h in CopyFiles */,
 				B240520A1A0B35EF00AFECE1 /* GAService.h in CopyFiles */,
@@ -81,8 +78,6 @@
 		B24051C01A0B31D300AFECE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientEvent.h; sourceTree = "<group>"; };
 		B24051CB1A0B322E00AFECE1 /* GAClientEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientEvent.m; sourceTree = "<group>"; };
-		B24051CC1A0B322E00AFECE1 /* GAClientEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientEventService.h; sourceTree = "<group>"; };
-		B24051CD1A0B322E00AFECE1 /* GAClientEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientEventService.m; sourceTree = "<group>"; };
 		B24051CE1A0B322E00AFECE1 /* GAClientTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTag.h; sourceTree = "<group>"; };
 		B24051CF1A0B322E00AFECE1 /* GAClientTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTag.m; sourceTree = "<group>"; };
 		B24051D01A0B322E00AFECE1 /* GAClientTagService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTagService.h; sourceTree = "<group>"; };
@@ -168,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */,
-				B24051CC1A0B322E00AFECE1 /* GAClientEventService.h */,
 				B24051CE1A0B322E00AFECE1 /* GAClientTag.h */,
 				B24051D01A0B322E00AFECE1 /* GAClientTagService.h */,
 				B24051D41A0B322E00AFECE1 /* GAService.h */,
@@ -181,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				B24051CB1A0B322E00AFECE1 /* GAClientEvent.m */,
-				B24051CD1A0B322E00AFECE1 /* GAClientEventService.m */,
 				B24051CF1A0B322E00AFECE1 /* GAClientTag.m */,
 				B24051D11A0B322E00AFECE1 /* GAClientTagService.m */,
 				B24051D51A0B322E00AFECE1 /* GAService.m */,
@@ -313,7 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24051B51A0B31D300AFECE1 /* GrowthAnalytics.m in Sources */,
-				B24051D71A0B322E00AFECE1 /* GAClientEventService.m in Sources */,
 				B24051D61A0B322E00AFECE1 /* GAClientEvent.m in Sources */,
 				B24051D81A0B322E00AFECE1 /* GAClientTag.m in Sources */,
 				B24051DB1A0B322E00AFECE1 /* GAService.m in Sources */,

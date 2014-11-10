@@ -7,7 +7,7 @@
 //
 
 #import "GrowthAnalytics.h"
-#import "GAClientEventService.h"
+#import "GAClientEvent.h"
 #import "GAClientTagService.h"
 
 static GrowthAnalytics *sharedInstance = nil;
@@ -73,14 +73,17 @@ static NSString *const kGPPreferenceDefaultFileName = @"growthanalytics-preferen
 
 - (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties {
     
-    [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
+        
+        GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties];
+        if(clientEvent) {
+            [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
+        }
     
-    [[GAClientEventService sharedInstance] createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties success:^(GAClientEvent *clientEvent) {
-        [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
-    } fail:^(NSInteger status, NSError *error) {
-        [logger info:@"Tracking event fail. %@", error];
-    }];
-    
+    });
+
 }
 
 - (void)setTag:(NSString *)tagId value:(NSString *)value {
