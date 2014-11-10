@@ -9,7 +9,7 @@
 #import "GAClientEvent.h"
 #import "GBUtils.h"
 #import "GBHttpClient.h"
-#import "GrowthbeatCore.h"
+#import "GrowthAnalytics.h"
 
 @implementation GAClientEvent
 
@@ -37,15 +37,14 @@
     }
     
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
-    GBHttpResponse *httpResponse = [[[GrowthbeatCore sharedInstance] httpClient] httpRequest:httpRequest];
+    GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
     if(!httpResponse.success){
-        [[[GrowthbeatCore sharedInstance] logger] error:@"Filed to create client. %@", httpResponse.error];
+        [[[GrowthAnalytics sharedInstance] logger] error:@"Filed to create client event. %@", httpResponse.error];
         return nil;
     }
     
     return [GAClientEvent domainWithDictionary:httpResponse.body];
 
-    
 }
 
 - (id) initWithDictionary:(NSDictionary *)dictionary {

@@ -8,6 +8,8 @@
 
 #import "GAClientTag.h"
 #import "GBUtils.h"
+#import "GBHttpClient.h"
+#import "GrowthAnalytics.h"
 
 @implementation GAClientTag
 
@@ -16,6 +18,31 @@
 @synthesize tagId;
 @synthesize value;
 @synthesize created;
+
++ (GAClientTag *)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value {
+    
+    NSString *path = @"/1/client_tags";
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    
+    if (clientId) {
+        [body setObject:clientId forKey:@"clientId"];
+    }
+    if (tagId) {
+        [body setObject:tagId forKey:@"tagId"];
+    }
+    if (value) {
+        [body setObject:value forKey:@"value"];
+    }
+    
+    GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
+    GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
+    if(!httpResponse.success){
+        [[[GrowthAnalytics sharedInstance] logger] error:@"Filed to create client event. %@", httpResponse.error];
+        return nil;
+    }
+    
+    return [GAClientTag domainWithDictionary:httpResponse.body];
+}
 
 - (id) initWithDictionary:(NSDictionary *)dictionary {
     
