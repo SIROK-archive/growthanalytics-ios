@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 SIROK, Inc. All rights reserved.
 //
 
-#import "GADomain.h"
+#import "GBDomain.h"
 
-@interface GAClientTag : GADomain {
+@interface GAClientTag : GBDomain {
     
     NSString *id;
     NSString *clientId;

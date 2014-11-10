@@ -7,6 +7,7 @@
 //
 
 #import "GAClientEvent.h"
+#import "GBUtils.h"
 
 @implementation GAClientEvent
 

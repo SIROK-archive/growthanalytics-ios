@@ -29,14 +29,12 @@
 		B24051D71A0B322E00AFECE1 /* GAClientEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051CD1A0B322E00AFECE1 /* GAClientEventService.m */; };
 		B24051D81A0B322E00AFECE1 /* GAClientTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051CF1A0B322E00AFECE1 /* GAClientTag.m */; };
 		B24051D91A0B322E00AFECE1 /* GAClientTagService.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051D11A0B322E00AFECE1 /* GAClientTagService.m */; };
-		B24051DA1A0B322E00AFECE1 /* GADomain.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051D31A0B322E00AFECE1 /* GADomain.m */; };
 		B24051DB1A0B322E00AFECE1 /* GAService.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051D51A0B322E00AFECE1 /* GAService.m */; };
 		B24051DF1A0B326300AFECE1 /* GrowthbeatCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051DE1A0B326300AFECE1 /* GrowthbeatCore.framework */; };
 		B24052051A0B35EF00AFECE1 /* GAClientEvent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */; };
 		B24052061A0B35EF00AFECE1 /* GAClientEventService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CC1A0B322E00AFECE1 /* GAClientEventService.h */; };
 		B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051CE1A0B322E00AFECE1 /* GAClientTag.h */; };
 		B24052081A0B35EF00AFECE1 /* GAClientTagService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D01A0B322E00AFECE1 /* GAClientTagService.h */; };
-		B24052091A0B35EF00AFECE1 /* GADomain.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D21A0B322E00AFECE1 /* GADomain.h */; };
 		B240520A1A0B35EF00AFECE1 /* GAService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051D41A0B322E00AFECE1 /* GAService.h */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +66,6 @@
 				B24052061A0B35EF00AFECE1 /* GAClientEventService.h in CopyFiles */,
 				B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */,
 				B24052081A0B35EF00AFECE1 /* GAClientTagService.h in CopyFiles */,
-				B24052091A0B35EF00AFECE1 /* GADomain.h in CopyFiles */,
 				B240520A1A0B35EF00AFECE1 /* GAService.h in CopyFiles */,
 				B24051B31A0B31D300AFECE1 /* GrowthAnalytics.h in CopyFiles */,
 			);
@@ -90,8 +87,6 @@
 		B24051CF1A0B322E00AFECE1 /* GAClientTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTag.m; sourceTree = "<group>"; };
 		B24051D01A0B322E00AFECE1 /* GAClientTagService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTagService.h; sourceTree = "<group>"; };
 		B24051D11A0B322E00AFECE1 /* GAClientTagService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTagService.m; sourceTree = "<group>"; };
-		B24051D21A0B322E00AFECE1 /* GADomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADomain.h; sourceTree = "<group>"; };
-		B24051D31A0B322E00AFECE1 /* GADomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADomain.m; sourceTree = "<group>"; };
 		B24051D41A0B322E00AFECE1 /* GAService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAService.h; sourceTree = "<group>"; };
 		B24051D51A0B322E00AFECE1 /* GAService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAService.m; sourceTree = "<group>"; };
 		B24051DE1A0B326300AFECE1 /* GrowthbeatCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthbeatCore.framework; path = "../submodules/growthbeat-core-ios/GrowthbeatCore.framework"; sourceTree = "<group>"; };
@@ -176,7 +171,6 @@
 				B24051CC1A0B322E00AFECE1 /* GAClientEventService.h */,
 				B24051CE1A0B322E00AFECE1 /* GAClientTag.h */,
 				B24051D01A0B322E00AFECE1 /* GAClientTagService.h */,
-				B24051D21A0B322E00AFECE1 /* GADomain.h */,
 				B24051D41A0B322E00AFECE1 /* GAService.h */,
 				B24051B21A0B31D300AFECE1 /* GrowthAnalytics.h */,
 			);
@@ -190,7 +184,6 @@
 				B24051CD1A0B322E00AFECE1 /* GAClientEventService.m */,
 				B24051CF1A0B322E00AFECE1 /* GAClientTag.m */,
 				B24051D11A0B322E00AFECE1 /* GAClientTagService.m */,
-				B24051D31A0B322E00AFECE1 /* GADomain.m */,
 				B24051D51A0B322E00AFECE1 /* GAService.m */,
 				B24051B41A0B31D300AFECE1 /* GrowthAnalytics.m */,
 			);
@@ -322,7 +315,6 @@
 				B24051B51A0B31D300AFECE1 /* GrowthAnalytics.m in Sources */,
 				B24051D71A0B322E00AFECE1 /* GAClientEventService.m in Sources */,
 				B24051D61A0B322E00AFECE1 /* GAClientEvent.m in Sources */,
-				B24051DA1A0B322E00AFECE1 /* GADomain.m in Sources */,
 				B24051D81A0B322E00AFECE1 /* GAClientTag.m in Sources */,
 				B24051DB1A0B322E00AFECE1 /* GAService.m in Sources */,
 				B24051D91A0B322E00AFECE1 /* GAClientTagService.m in Sources */,
@@ -547,6 +539,7 @@
 				B240520E1A0B364500AFECE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

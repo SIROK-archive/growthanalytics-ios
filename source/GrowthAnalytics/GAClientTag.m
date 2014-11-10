@@ -7,6 +7,7 @@
 //
 
 #import "GAClientTag.h"
+#import "GBUtils.h"
 
 @implementation GAClientTag
 
