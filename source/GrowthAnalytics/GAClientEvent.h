@@ -24,4 +24,6 @@
 @property (nonatomic, strong) NSDictionary *properties;
 @property (nonatomic, strong) NSDate *created;
 
++ (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties;
+
 @end

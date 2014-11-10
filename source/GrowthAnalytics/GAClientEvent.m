@@ -8,6 +8,8 @@
 
 #import "GAClientEvent.h"
 #import "GBUtils.h"
+#import "GBHttpClient.h"
+#import "GrowthbeatCore.h"
 
 @implementation GAClientEvent
 
@@ -16,6 +18,35 @@
 @synthesize eventId;
 @synthesize properties;
 @synthesize created;
+
++ (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties {
+    
+    NSString *path = @"/1/client_events";
+    NSMutableDictionary *body = [NSMutableDictionary dictionary];
+    
+    if (clientId) {
+        [body setObject:clientId forKey:@"clientId"];
+    }
+    if (eventId) {
+        [body setObject:eventId forKey:@"eventId"];
+    }
+    if (properties) {
+        for(id key in [properties keyEnumerator]) {
+            [body setObject:[properties objectForKey:key] forKey:[NSString stringWithFormat:@"properties[%@]", key]];
+        }
+    }
+    
+    GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
+    GBHttpResponse *httpResponse = [[[GrowthbeatCore sharedInstance] httpClient] httpRequest:httpRequest];
+    if(!httpResponse.success){
+        [[[GrowthbeatCore sharedInstance] logger] error:@"Filed to create client. %@", httpResponse.error];
+        return nil;
+    }
+    
+    return [GAClientEvent domainWithDictionary:httpResponse.body];
+
+    
+}
 
 - (id) initWithDictionary:(NSDictionary *)dictionary {
     
