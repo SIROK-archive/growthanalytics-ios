@@ -46,12 +46,12 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     return [GAClientTag domainWithDictionary:httpResponse.body];
 }
 
-+ (void) save:(GAClientTag *)clientEvent {
++ (void) save:(GAClientTag *)clientTag {
 
     NSMutableDictionary *tags = [GAClientTag loadClientTags];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:clientEvent];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:clientTag];
 
-    [tags setObject:data forKey:[clientEvent tagId]];
+    [tags setObject:data forKey:[clientTag tagId]];
     
     [[[GrowthAnalytics sharedInstance] preference] setObject:tags forKey:kGAPreferenceTagsKey];
 }
@@ -60,6 +60,9 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     
     NSMutableDictionary *tags = [GAClientTag loadClientTags];
     NSData *data = [tags objectForKey:tagId];
+    if (!data) {
+        return nil;
+    }
     
     return [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
