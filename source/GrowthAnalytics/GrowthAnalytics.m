@@ -92,10 +92,21 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         [logger info:@"Set tag... (tagId: %@, value: %@)", tagId, value];
+        GAClientTag *referencedClientTag = [GAClientTag loadClientTag:tagId];
+        NSComparisonResult result = [[referencedClientTag value] compare:value];
+        switch (result) {
+            case NSOrderedSame:
+                [logger info:@"Already set tag (tagId: %@, value: %@)", tagId, value];
+                return;
+                
+            default:
+                break;
+        }
         
         GAClientTag *clientTag = [GAClientTag createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] tagId:tagId value:value];
         if(clientTag) {
             [logger info:@"Setting tag success. (clientTagId: %@)", clientTag.id];
+            [GAClientTag save:clientTag];
         }
         
     });
