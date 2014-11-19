@@ -68,7 +68,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     self.applicationId = newApplicationId;
     self.credentialId = newCredentialId;
     
-    [GrowthbeatCore initializeWithApplicationId:applicationId credentialId:credentialId];
+    [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
     
 }
 
