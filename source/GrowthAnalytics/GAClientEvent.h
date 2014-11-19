@@ -25,5 +25,7 @@
 @property (nonatomic, strong) NSDate *created;
 
 + (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties;
++ (void) save:(GAClientEvent *)clientEvent;
++ (GAClientEvent *) loadClientEvent:(NSString *)eventId;
 
 @end
