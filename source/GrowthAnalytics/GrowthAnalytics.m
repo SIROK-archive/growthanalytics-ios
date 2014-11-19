@@ -72,6 +72,14 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     
 }
 
+- (void)trackEvent:(NSString *)eventId {
+    [self trackEvent:eventId properties:[NSDictionary alloc] option:GATrackEventOptionDefault];
+}
+
+- (void)trackEventOnce:(NSString *)eventId {
+    [self trackEvent:eventId properties:[NSDictionary alloc] option:GATrackEventOptionOnce];
+}
+
 - (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackEventOption)option {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{

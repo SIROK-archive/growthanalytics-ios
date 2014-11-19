@@ -26,6 +26,10 @@
  */
 - (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
 
+
+- (void)trackEvent:(NSString *)eventId;
+- (void)trackEventOnce:(NSString *)eventId;
+
 /**
  * Track event
  *
