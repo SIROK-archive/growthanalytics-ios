@@ -46,6 +46,8 @@
  */
 - (void)setTag:(NSString *)tagId value:(NSString *)value;
 
+- (void) setDeviceTags;
+
 - (GBLogger *)logger;
 - (GBHttpClient *)httpClient;
 - (GBPreference *)preference;

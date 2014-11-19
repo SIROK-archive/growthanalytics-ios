@@ -132,4 +132,27 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     
 }
 
+- (void) setDeviceTags {
+    
+    if ([GBDeviceUtils model]) {
+        [self setTag:@"Device" value:[GBDeviceUtils model]];
+    }
+    if ([GBDeviceUtils os]) {
+        [self setTag:@"OS" value:[GBDeviceUtils os]];
+    }
+    if ([GBDeviceUtils language]) {
+        [self setTag:@"Language" value:[GBDeviceUtils language]];
+    }
+    if ([GBDeviceUtils timeZone]) {
+        [self setTag:@"Time Zone" value:[GBDeviceUtils timeZone]];
+    }
+    if ([GBDeviceUtils version]) {
+        [self setTag:@"Version" value:[GBDeviceUtils version]];
+    }
+    if ([GBDeviceUtils build]) {
+        [self setTag:@"Build" value:[GBDeviceUtils build]];
+    }
+    
+}
+
 @end
