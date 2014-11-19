@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GrowthbeatCore.h"
+#import "GATrackEventOption.h"
 
 @interface GrowthAnalytics : NSObject
 
@@ -31,7 +32,7 @@
  * @param eventId Event ID
  * @param properties properties for the tracking
  */
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties;
+- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackEventOption)option;
 
 /**
  * Set tag

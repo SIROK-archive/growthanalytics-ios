@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_OPTIONS (NSInteger, EGPOption) {
+typedef NS_OPTIONS (NSInteger, GATrackEventOption) {
     GATrackEventOptionDefault = 0,
     GATrackEventOptionOnce = 1 << 0,
     GATrackEventOptionMarkFirstTime = 1 << 1,

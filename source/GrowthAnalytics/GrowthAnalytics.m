@@ -72,15 +72,26 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     
 }
 
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties {
+- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackEventOption)option {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
+        if ((option & GATrackEventOptionOnce) && [GAClientEvent loadClientEvent:eventId]) {
+            [logger info:@"Already exists Track event. (eventId: %@, properties: %@)", eventId, properties];
+            return;
+        }
+        
+        if ((option & GATrackEventOptionMarkFirstTime) && ![GAClientEvent loadClientEvent:eventId]) {
+            [properties setValue:@"first_time" forKey:@""];
+        }
         
         GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties];
         if(clientEvent) {
             [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
+            if ((option & GATrackEventOptionOnce) && (option & GATrackEventOptionMarkFirstTime) && ![GAClientEvent loadClientEvent:eventId]) {
+                [GAClientEvent save:clientEvent];
+            }
         }
     
     });
@@ -96,7 +107,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         NSComparisonResult result = [[referencedClientTag value] compare:value];
         switch (result) {
             case NSOrderedSame:
-                [logger info:@"Already set tag (tagId: %@, value: %@)", tagId, value];
+                [logger info:@"Already set tag. (tagId: %@, value: %@)", tagId, value];
                 return;
                 
             default:
