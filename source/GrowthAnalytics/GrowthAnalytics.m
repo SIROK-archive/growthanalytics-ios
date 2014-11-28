@@ -15,6 +15,8 @@ static NSString *const kGBLoggerDefaultTag = @"GrowthAnalytics";
 static NSString *const kGBHttpClientDefaultBaseUrl = @"https://api.analytics.growthbeat.com/";
 static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferences";
 
+static NSString *const kGAGeneralTag = @"General";
+
 @interface GrowthAnalytics () {
     
     GBLogger *logger;
@@ -131,6 +133,22 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     });
     
 }
+
+- (void)setUserId:(NSString *)userId {
+    [self setTag:[NSString stringWithFormat:@"%@:UserId", kGAGeneralTag] value:userId];
+}
+
+- (void)setAdvertisingId:(NSString *)idfa {
+    [self setTag:[NSString stringWithFormat:@"%@:AdvertisingId", kGAGeneralTag] value:idfa];
+}
+
+//- (void)setAge:(NSInteger) age {
+//    [self setTag:[NSString stringWithFormat:@"%@:age", kGAGeneralTag] value:[[NSString alloc] initWithFormat:@"%d", age]];
+//}
+
+//- (void)setGender(NSString *)gender {
+//    [self setTag:[NSString stringWithFormat:@"%@:Gender", kGAGeneralTag] value:gender];
+//}
 
 - (void) setDeviceTags {
     
