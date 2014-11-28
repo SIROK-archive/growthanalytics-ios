@@ -182,12 +182,28 @@ static NSString *const kGAGeneralTag = @"General";
     [self setTag:[NSString stringWithFormat:@"%@:Development", kGAGeneralTag] value:nil];
 }
 
-- (void) open {
-    
+- (void)open {
+    NSDictionary *properties = [[NSDictionary alloc] init];
+    [properties setValue:nil forKey:@"referrer"];
+    [self trackEvent:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag] properties:properties option:GATrackEventOptionDefault];
 }
 
-- (void) close {
-    
+- (void)close {
+    [self trackEvent:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:nil option:GATrackEventOptionDefault];
+    GAClientEvent *event = [GAClientEvent loadClientEvent:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag]];
+    if(event) {
+        NSTimeInterval interval = [[event created] timeIntervalSinceNow];
+        NSDictionary *properties = [[NSDictionary alloc] init];
+        [properties setValue:[[NSString alloc] initWithFormat:@"%f", interval] forKey:@"Time"];
+    }
+}
+
+- (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product {
+    NSDictionary *properties = [[NSDictionary alloc] init];
+    [properties setValue:[[NSString alloc] initWithFormat:@"%ld", price] forKey:@"price"];
+    [properties setValue:@"Caegory" forKey:category];
+    [properties setValue:@"Product" forKey:product];
+    [self trackEvent:[NSString stringWithFormat:@"%@:Purchase", kGAGeneralTag] properties:properties option:GATrackEventOptionDefault];
 }
 
 
