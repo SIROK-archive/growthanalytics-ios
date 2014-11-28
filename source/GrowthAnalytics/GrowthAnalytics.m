@@ -146,9 +146,50 @@ static NSString *const kGAGeneralTag = @"General";
 //    [self setTag:[NSString stringWithFormat:@"%@:age", kGAGeneralTag] value:[[NSString alloc] initWithFormat:@"%d", age]];
 //}
 
-//- (void)setGender(NSString *)gender {
-//    [self setTag:[NSString stringWithFormat:@"%@:Gender", kGAGeneralTag] value:gender];
-//}
+- (void)setGender:(NSString *)gender {
+    [self setTag:[NSString stringWithFormat:@"%@:Gender", kGAGeneralTag] value:gender];
+}
+
+- (void)setLebel:(NSString *)level {
+    [self setTag:[NSString stringWithFormat:@"%@:Level", kGAGeneralTag] value:level];
+}
+
+- (void)setName:(NSString *)name {
+    [self setTag:[NSString stringWithFormat:@"%@:Name", kGAGeneralTag] value:name];
+}
+
+- (void)setLanguage:(NSString *)language {
+    [self setTag:[NSString stringWithFormat:@"%@:Language", kGAGeneralTag] value:language];
+}
+
+- (void)setLocale:(NSString *)locale {
+    [self setTag:[NSString stringWithFormat:@"%@:Locale", kGAGeneralTag] value:locale];
+}
+
+- (void)setOS:(NSString *)os {
+    [self setTag:[NSString stringWithFormat:@"%@:OS", kGAGeneralTag] value:os];
+}
+
+- (void)setTimeZone:(NSString *)timezone {
+    [self setTag:[NSString stringWithFormat:@"%@:TimeZone", kGAGeneralTag] value:timezone];
+}
+
+- (void)setAppVersion:(NSString *)appVersion {
+    [self setTag:[NSString stringWithFormat:@"%@:AppVersion", kGAGeneralTag] value:appVersion];
+}
+
+- (void)setDevelopment {
+    [self setTag:[NSString stringWithFormat:@"%@:Development", kGAGeneralTag] value:nil];
+}
+
+- (void) open {
+    
+}
+
+- (void) close {
+    
+}
+
 
 - (void) setDeviceTags {
     
