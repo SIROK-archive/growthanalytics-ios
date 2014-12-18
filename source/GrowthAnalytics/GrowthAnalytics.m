@@ -189,13 +189,14 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)close {
-    [self trackEvent:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:nil option:GATrackEventOptionDefault];
     GAClientEvent *event = [GAClientEvent loadClientEvent:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag]];
+    NSDictionary *properties = nil;
     if(event) {
         NSTimeInterval interval = [[event created] timeIntervalSinceNow];
-        NSDictionary *properties = [[NSDictionary alloc] init];
+        properties = [[NSDictionary alloc] init];
         [properties setValue:[[NSString alloc] initWithFormat:@"%f", interval] forKey:@"Time"];
     }
+    [self trackEvent:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:properties option:GATrackEventOptionDefault];
 }
 
 - (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product {
