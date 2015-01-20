@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 SIROK, Inc. All rights reserved.
 //
 
-#import "GADomain.h"
+#import "GBDomain.h"
 
-@interface GAClientEvent : GADomain {
+@interface GAClientEvent : GBDomain {
     
     NSString *id;
     NSString *clientId;
@@ -23,5 +23,9 @@
 @property (nonatomic, strong) NSString *eventId;
 @property (nonatomic, strong) NSDictionary *properties;
 @property (nonatomic, strong) NSDate *created;
+
++ (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties;
++ (void) save:(GAClientEvent *)clientEvent;
++ (GAClientEvent *) loadClientEvent:(NSString *)eventId;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GrowthbeatCore.h"
+#import "GATrackEventOption.h"
 
 @interface GrowthAnalytics : NSObject
 
@@ -25,13 +26,17 @@
  */
 - (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
 
+
+- (void)trackEvent:(NSString *)eventId;
+- (void)trackEventOnce:(NSString *)eventId;
+
 /**
  * Track event
  *
  * @param eventId Event ID
  * @param properties properties for the tracking
  */
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties;
+- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackEventOption)option;
 
 /**
  * Set tag
@@ -40,6 +45,24 @@
  * @param value value for the tag
  */
 - (void)setTag:(NSString *)tagId value:(NSString *)value;
+
+- (void)setUserId:(NSString *)userId;
+- (void)setAdvertisingId:(NSString *)idfa;
+- (void)setGender:(NSString *)gender;
+- (void)setLebel:(NSString *)level;
+- (void)setName:(NSString *)name;
+- (void)setLanguage:(NSString *)language;
+- (void)setLocale:(NSString *)locale;
+- (void)setOS:(NSString *)os;
+- (void)setTimeZone:(NSString *)timezone;
+- (void)setAppVersion:(NSString *)appVersion;
+- (void)setDevelopment;
+
+- (void)open;
+- (void)close;
+- (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product;
+
+- (void) setDeviceTags;
 
 - (GBLogger *)logger;
 - (GBHttpClient *)httpClient;

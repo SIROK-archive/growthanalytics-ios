@@ -46,6 +46,22 @@
  */
 - (void)setTag:(NSString *)tagId value:(NSString *)value;
 
+- (void)setUserId:(NSString *)userId;
+- (void)setAdvertisingId:(NSString *)idfa;
+- (void)setGender:(NSString *)gender;
+- (void)setLebel:(NSString *)level;
+- (void)setName:(NSString *)name;
+- (void)setLanguage:(NSString *)language;
+- (void)setLocale:(NSString *)locale;
+- (void)setOS:(NSString *)os;
+- (void)setTimeZone:(NSString *)timezone;
+- (void)setAppVersion:(NSString *)appVersion;
+- (void)setDevelopment;
+
+- (void)open;
+- (void)close;
+- (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product;
+
 - (void) setDeviceTags;
 
 - (GBLogger *)logger;
