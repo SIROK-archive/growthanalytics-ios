@@ -99,7 +99,7 @@ static NSString *const kGAGeneralTag = @"General";
         GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties];
         if(clientEvent) {
             [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
-            if ((option & GATrackEventOptionOnce) && (option & GATrackEventOptionMarkFirstTime) && ![GAClientEvent loadClientEvent:eventId]) {
+            if ((option == GATrackEventOptionOnce) && (option == GATrackEventOptionMarkFirstTime) && ![GAClientEvent loadClientEvent:eventId]) {
                 [GAClientEvent save:clientEvent];
             }
         }
