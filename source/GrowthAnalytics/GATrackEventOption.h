@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_OPTIONS (NSInteger, GATrackEventOption) {
+typedef NS_ENUM (NSInteger, GATrackEventOption) {
     GATrackEventOptionDefault = 0,
-    GATrackEventOptionOnce = 1 << 0,
-    GATrackEventOptionMarkFirstTime = 1 << 1,
-    GATrackEventOptionMarkFirstTimeAndOnce = GATrackEventOptionOnce | GATrackEventOptionMarkFirstTime,
+    GATrackEventOptionOnce = 1,
+    GATrackEventOptionMarkFirstTime = 2
 };
