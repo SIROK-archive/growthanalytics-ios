@@ -8,7 +8,7 @@
 
 #import "GBDomain.h"
 
-@interface GAClientEvent : GBDomain {
+@interface GAClientEvent : GBDomain <NSCoding> {
     
     NSString *id;
     NSString *clientId;
@@ -26,6 +26,6 @@
 
 + (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties;
 + (void) save:(GAClientEvent *)clientEvent;
-+ (GAClientEvent *) loadClientEvent:(NSString *)eventId;
++ (GAClientEvent *) load:(NSString *)eventId;
 
 @end

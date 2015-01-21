@@ -87,19 +87,19 @@ static NSString *const kGAGeneralTag = @"General";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
-        if ((option & GATrackEventOptionOnce) && [GAClientEvent loadClientEvent:eventId]) {
+        if ((option & GATrackEventOptionOnce) && [GAClientEvent load:eventId]) {
             [logger info:@"Already exists Track event. (eventId: %@, properties: %@)", eventId, properties];
             return;
         }
         
-        if ((option & GATrackEventOptionMarkFirstTime) && ![GAClientEvent loadClientEvent:eventId]) {
+        if ((option & GATrackEventOptionMarkFirstTime) && ![GAClientEvent load:eventId]) {
             [properties setValue:@"first_time" forKey:@""];
         }
         
         GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties];
         if(clientEvent) {
             [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
-            if ((option == GATrackEventOptionOnce) && (option == GATrackEventOptionMarkFirstTime) && ![GAClientEvent loadClientEvent:eventId]) {
+            if ((option == GATrackEventOptionOnce) && (option == GATrackEventOptionMarkFirstTime) && ![GAClientEvent load:eventId]) {
                 [GAClientEvent save:clientEvent];
             }
         }
@@ -189,7 +189,7 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)close {
-    GAClientEvent *event = [GAClientEvent loadClientEvent:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag]];
+    GAClientEvent *event = [GAClientEvent load:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag]];
     NSDictionary *properties = nil;
     if(event) {
         NSTimeInterval interval = [[event created] timeIntervalSinceNow];

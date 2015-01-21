@@ -54,7 +54,7 @@
     
 }
 
-+ (GAClientEvent *) loadClientEvent:(NSString *)eventId {
++ (GAClientEvent *) load:(NSString *)eventId {
     
     NSData *data = [[[GrowthAnalytics sharedInstance] preference] objectForKey:eventId];
     if (!data) {
@@ -87,6 +87,39 @@
     }
     return self;
     
+}
+
+#pragma mark --
+#pragma mark NSCoding
+
+- (instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        if ([aDecoder containsValueForKey:@"id"]) {
+            self.id = [aDecoder decodeObjectForKey:@"id"];
+        }
+        if ([aDecoder containsValueForKey:@"clientId"]) {
+            self.clientId = [aDecoder decodeObjectForKey:@"clientId"];
+        }
+        if ([aDecoder containsValueForKey:@"eventId"]) {
+            self.eventId = [aDecoder decodeObjectForKey:@"eventId"];
+        }
+        if ([aDecoder containsValueForKey:@"properties"]) {
+            self.properties = [aDecoder decodeObjectForKey:@"properties"];
+        }
+        if ([aDecoder containsValueForKey:@"created"]) {
+            self.created = [aDecoder decodeObjectForKey:@"created"];
+        }
+    }
+    return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:id forKey:@"id"];
+    [aCoder encodeObject:clientId forKey:@"clientId"];
+    [aCoder encodeObject:eventId forKey:@"eventId"];
+    [aCoder encodeObject:properties forKey:@"properties"];
+    [aCoder encodeObject:created forKey:@"created"];
 }
 
 @end
