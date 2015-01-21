@@ -13,7 +13,6 @@
 
 @implementation GAClientTag
 
-@synthesize id;
 @synthesize clientId;
 @synthesize tagId;
 @synthesize value;
@@ -39,7 +38,7 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
     GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
     if(!httpResponse.success){
-        [[[GrowthAnalytics sharedInstance] logger] error:@"Filed to create client event. %@", httpResponse.error];
+        [[[GrowthAnalytics sharedInstance] logger] error:@"Filed to create client tag. %@", httpResponse.error];
         return nil;
     }
     
@@ -48,7 +47,7 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
 
 + (void) save:(GAClientTag *)clientTag {
 
-    NSMutableDictionary *tags = [GAClientTag loadClientTags];
+    NSMutableDictionary *tags = [self loadClientTags];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:clientTag];
 
     [tags setObject:data forKey:[clientTag tagId]];
@@ -56,9 +55,9 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     [[[GrowthAnalytics sharedInstance] preference] setObject:tags forKey:kGAPreferenceTagsKey];
 }
 
-+ (GAClientTag *) loadClientTag:(NSString *)tagId {
++ (GAClientTag *) load:(NSString *)tagId {
     
-    NSMutableDictionary *tags = [GAClientTag loadClientTags];
+    NSMutableDictionary *tags = [self loadClientTags];
     NSData *data = [tags objectForKey:tagId];
     if (!data) {
         return nil;
@@ -83,9 +82,6 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     
     self = [super init];
     if (self) {
-        if ([dictionary objectForKey:@"id"] && [dictionary objectForKey:@"id"] != [NSNull null]) {
-            self.id = [dictionary objectForKey:@"id"];
-        }
         if ([dictionary objectForKey:@"clientId"] && [dictionary objectForKey:@"clientId"] != [NSNull null]) {
             self.clientId = [dictionary objectForKey:@"clientId"];
         }
@@ -101,6 +97,35 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     }
     return self;
     
+}
+
+#pragma mark --
+#pragma mark NSCoding
+
+- (instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        if ([aDecoder containsValueForKey:@"clientId"]) {
+            self.clientId = [aDecoder decodeObjectForKey:@"clientId"];
+        }
+        if ([aDecoder containsValueForKey:@"tagId"]) {
+            self.tagId = [aDecoder decodeObjectForKey:@"tagId"];
+        }
+        if ([aDecoder containsValueForKey:@"value"]) {
+            self.value = [aDecoder decodeObjectForKey:@"value"];
+        }
+        if ([aDecoder containsValueForKey:@"created"]) {
+            self.created = [aDecoder decodeObjectForKey:@"created"];
+        }
+    }
+    return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:clientId forKey:@"clientId"];
+    [aCoder encodeObject:tagId forKey:@"tagId"];
+    [aCoder encodeObject:value forKey:@"value"];
+    [aCoder encodeObject:created forKey:@"created"];
 }
 
 @end

@@ -8,9 +8,8 @@
 
 #import "GBDomain.h"
 
-@interface GAClientTag : GBDomain {
+@interface GAClientTag : GBDomain <NSCoding> {
     
-    NSString *id;
     NSString *clientId;
     NSString *tagId;
     NSString *value;
@@ -18,14 +17,13 @@
     
 }
 
-@property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *clientId;
 @property (nonatomic, strong) NSString *tagId;
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, strong) NSDate *created;
 
 + (GAClientTag *)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value;
-+ (void) save:(GAClientTag *)clientEvent;
-+ (GAClientTag *) loadClientTag:(NSString *)tagId;
++ (void) save:(GAClientTag *)clientTag;
++ (GAClientTag *) load:(NSString *)tagId;
 
 @end
