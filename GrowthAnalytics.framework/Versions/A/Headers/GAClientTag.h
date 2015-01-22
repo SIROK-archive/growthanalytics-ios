@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, strong) NSDate *created;
 
-+ (GAClientTag *)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value;
++ (GAClientTag *)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value credentialId:(NSString *)credentialId;
 + (void) save:(GAClientTag *)clientTag;
 + (GAClientTag *) load:(NSString *)tagId;
 

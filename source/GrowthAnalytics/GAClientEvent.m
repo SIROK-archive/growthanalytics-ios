@@ -19,7 +19,7 @@
 @synthesize properties;
 @synthesize created;
 
-+ (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties {
++ (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties credentialId:(NSString *)credentialId {
     
     NSString *path = @"/1/client_events";
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
@@ -35,10 +35,14 @@
             [body setObject:[properties objectForKey:key] forKey:[NSString stringWithFormat:@"properties[%@]", key]];
         }
     }
+    if (credentialId) {
+        [body setObject:credentialId forKey:@"credentialId"];
+    }
     
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
     GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
     if(!httpResponse.success){
+        NSLog(@"body: %@", httpResponse.body);
         [[[GrowthAnalytics sharedInstance] logger] error:@"Failed to create client event. %@", httpResponse.error?httpResponse.error:[httpResponse.body objectForKey:@"message"]];
         return nil;
     }

@@ -20,7 +20,7 @@
 
 static NSString *const kGAPreferenceTagsKey = @"tags";
 
-+ (GAClientTag *)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value {
++ (GAClientTag *)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value credentialId:(NSString *)credentialId {
     
     NSString *path = @"/1/client_tags";
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
@@ -33,6 +33,9 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     }
     if (value) {
         [body setObject:value forKey:@"value"];
+    }
+    if (credentialId) {
+        [body setObject:credentialId forKey:@"credentialId"];
     }
     
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
