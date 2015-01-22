@@ -46,36 +46,11 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
 }
 
 + (void) save:(GAClientTag *)clientTag {
-
-    NSMutableDictionary *tags = [self loadClientTags];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:clientTag];
-
-    [tags setObject:data forKey:[clientTag tagId]];
-    
-    [[[GrowthAnalytics sharedInstance] preference] setObject:tags forKey:kGAPreferenceTagsKey];
+    [[[GrowthAnalytics sharedInstance] preference] setObject:clientTag forKey:clientTag.tagId];
 }
 
 + (GAClientTag *) load:(NSString *)tagId {
-    
-    NSMutableDictionary *tags = [self loadClientTags];
-    NSData *data = [tags objectForKey:tagId];
-    if (!data) {
-        return nil;
-    }
-    
-    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-}
-
-+ (NSMutableDictionary *) loadClientTags {
-    
-    NSDictionary *loadedTags = [[[GrowthAnalytics sharedInstance] preference] objectForKey:kGAPreferenceTagsKey];
-    if (loadedTags && [loadedTags isKindOfClass:[NSDictionary class]]) {
-        return [NSMutableDictionary dictionaryWithDictionary:loadedTags];
-    }
-    
-    return [NSMutableDictionary dictionary];
-    
+    return [[[GrowthAnalytics sharedInstance] preference] objectForKey:tagId];
 }
 
 - (id) initWithDictionary:(NSDictionary *)dictionary {

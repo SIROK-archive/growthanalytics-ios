@@ -113,7 +113,7 @@ static NSString *const kGAGeneralTag = @"General";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         [logger info:@"Set tag... (tagId: %@, value: %@)", tagId, value];
-        GAClientTag *referencedClientTag = [GAClientTag loadClientTag:tagId];
+        GAClientTag *referencedClientTag = [GAClientTag load:tagId];
         NSComparisonResult result = [[referencedClientTag value] compare:value];
         switch (result) {
             case NSOrderedSame:
@@ -126,7 +126,7 @@ static NSString *const kGAGeneralTag = @"General";
         
         GAClientTag *clientTag = [GAClientTag createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] tagId:tagId value:value];
         if(clientTag) {
-            [logger info:@"Setting tag success. (clientTagId: %@)", clientTag.id];
+            [logger info:@"Setting tag success."];
             [GAClientTag save:clientTag];
         }
         

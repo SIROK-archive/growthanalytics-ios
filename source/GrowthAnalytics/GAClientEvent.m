@@ -48,21 +48,11 @@
 }
 
 + (void) save:(GAClientEvent *)clientEvent {
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:clientEvent];
-    [[[GrowthAnalytics sharedInstance] preference] setObject:data forKey:[clientEvent eventId]];
-    
+    [[[GrowthAnalytics sharedInstance] preference] setObject:clientEvent forKey:clientEvent.eventId];
 }
 
 + (GAClientEvent *) load:(NSString *)eventId {
-    
-    NSData *data = [[[GrowthAnalytics sharedInstance] preference] objectForKey:eventId];
-    if (!data) {
-        return nil;
-    }
-    
-    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
+    return [[[GrowthAnalytics sharedInstance] preference] objectForKey:eventId];
 }
 
 - (id) initWithDictionary:(NSDictionary *)dictionary {
