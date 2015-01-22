@@ -75,31 +75,35 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)trackEvent:(NSString *)eventId {
-    [self trackEvent:eventId properties:[NSDictionary alloc] option:GATrackEventOptionDefault];
+    [self trackEvent:eventId properties:nil option:GATrackOptionDefault];
 }
 
-- (void)trackEventOnce:(NSString *)eventId {
-    [self trackEvent:eventId properties:[NSDictionary alloc] option:GATrackEventOptionOnce];
+- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties {
+    [self trackEvent:eventId properties:properties option:GATrackOptionDefault];
 }
 
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackEventOption)option {
+- (void)trackEvent:(NSString *)eventId option:(GATrackOption)option {
+    [self trackEvent:eventId properties:nil option:option];
+}
+
+- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
-        if ((option & GATrackEventOptionOnce) && [GAClientEvent load:eventId]) {
+        if ((option & GATrackOptionOnce) && [GAClientEvent load:eventId]) {
             [logger info:@"Already exists Track event. (eventId: %@, properties: %@)", eventId, properties];
             return;
         }
         
-        if ((option & GATrackEventOptionMarkFirstTime) && ![GAClientEvent load:eventId]) {
+        if ((option & GATrackOptionCounter) && ![GAClientEvent load:eventId]) {
             [properties setValue:@"first_time" forKey:@""];
         }
         
         GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties];
         if(clientEvent) {
             [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
-            if ((option == GATrackEventOptionOnce) && (option == GATrackEventOptionMarkFirstTime) && ![GAClientEvent load:eventId]) {
+            if ((option == GATrackOptionOnce) && (option == GATrackOptionCounter) && ![GAClientEvent load:eventId]) {
                 [GAClientEvent save:clientEvent];
             }
         }
@@ -185,7 +189,7 @@ static NSString *const kGAGeneralTag = @"General";
 - (void)open {
     NSDictionary *properties = [[NSDictionary alloc] init];
     [properties setValue:nil forKey:@"referrer"];
-    [self trackEvent:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag] properties:properties option:GATrackEventOptionDefault];
+    [self trackEvent:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
 - (void)close {
@@ -196,7 +200,7 @@ static NSString *const kGAGeneralTag = @"General";
         properties = [[NSDictionary alloc] init];
         [properties setValue:[[NSString alloc] initWithFormat:@"%f", interval] forKey:@"Time"];
     }
-    [self trackEvent:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:properties option:GATrackEventOptionDefault];
+    [self trackEvent:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
 - (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product {
@@ -204,7 +208,7 @@ static NSString *const kGAGeneralTag = @"General";
     [properties setValue:[[NSString alloc] initWithFormat:@"%ld", price] forKey:@"price"];
     [properties setValue:@"Caegory" forKey:category];
     [properties setValue:@"Product" forKey:product];
-    [self trackEvent:[NSString stringWithFormat:@"%@:Purchase", kGAGeneralTag] properties:properties option:GATrackEventOptionDefault];
+    [self trackEvent:[NSString stringWithFormat:@"%@:Purchase", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
 

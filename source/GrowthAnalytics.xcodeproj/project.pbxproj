@@ -75,7 +75,7 @@
 		B24051CE1A0B322E00AFECE1 /* GAClientTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTag.h; sourceTree = "<group>"; };
 		B24051CF1A0B322E00AFECE1 /* GAClientTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTag.m; sourceTree = "<group>"; };
 		B24051DE1A0B326300AFECE1 /* GrowthbeatCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthbeatCore.framework; path = "../submodules/growthbeat-core-ios/GrowthbeatCore.framework"; sourceTree = "<group>"; };
-		C13AAB161A1C8E1F00BE2FD1 /* GATrackEventOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GATrackEventOption.h; sourceTree = "<group>"; };
+		C13AAB161A1C8E1F00BE2FD1 /* GATrackOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GATrackOption.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +155,7 @@
 			children = (
 				B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */,
 				B24051CE1A0B322E00AFECE1 /* GAClientTag.h */,
-				C13AAB161A1C8E1F00BE2FD1 /* GATrackEventOption.h */,
+				C13AAB161A1C8E1F00BE2FD1 /* GATrackOption.h */,
 				B24051B21A0B31D300AFECE1 /* GrowthAnalytics.h */,
 			);
 			name = Headers;
