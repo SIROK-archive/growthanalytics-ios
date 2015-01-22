@@ -175,8 +175,8 @@ static NSString *const kGAGeneralTag = @"General";
     [self tag:[self generateTagId:@"UserId"] value:userId];
 }
 
-- (void)setAdvertisingId:(NSString *)idfa {
-    [self tag:[self generateTagId:@"AdvertisingID"] value:idfa];
+- (void)setName:(NSString *)name {
+    [self tag:[self generateTagId:@"Name"] value:name];
 }
 
 - (void)setAge:(int)age {
@@ -187,63 +187,48 @@ static NSString *const kGAGeneralTag = @"General";
     [self tag:[self generateTagId:@"Gender"] value:gender];
 }
 
-- (void)setLebel:(NSString *)level {
-    [self tag:[self generateTagId:@"Level"] value:level];
+- (void)setLevel:(int)level {
+    [self tag:[self generateTagId:@"Level"] value:[NSString stringWithFormat:@"%d", level]];
 }
 
-- (void)setName:(NSString *)name {
-    [self tag:[self generateTagId:@"Name"] value:name];
+- (void)setDevelopment:(BOOL)development {
+    [self tag:[self generateTagId:@"Development"] value:development?@"true":@"false"];
 }
 
-- (void)setLanguage:(NSString *)language {
-    [self tag:[self generateTagId:@"Language"] value:language];
+- (void)setOS {
+    [self tag:[self generateTagId:@"OS"] value:[GBDeviceUtils os]];
 }
 
-- (void)setOS:(NSString *)os {
-    [self tag:[self generateTagId:@"OS"] value:os];
+- (void)setLanguage {
+    [self tag:[self generateTagId:@"Language"] value:[GBDeviceUtils language]];
 }
 
-- (void)setTimeZone:(NSString *)timezone {
-    [self tag:[self generateTagId:@"TimeZone"] value:timezone];
+- (void)setTimeZone {
+    [self tag:[self generateTagId:@"TimeZone"] value:[GBDeviceUtils timeZone]];
 }
 
-- (void)setTimeZoneOffset:(NSString *)timezoneOffset {
-    [self tag:[self generateTagId:@"TimeZoneOffset"] value:timezoneOffset];
+- (void)setTimeZoneOffset {
+    [self tag:[self generateTagId:@"TimeZoneOffset"] value:[GBDeviceUtils timeZoneOffset]];
 }
 
-- (void)setAppVersion:(NSString *)appVersion {
-    [self tag:[self generateTagId:@"AppVersion"] value:appVersion];
-}
-
-- (void)setDevelopment {
-    [self tag:[self generateTagId:@"Development"] value:nil];
+- (void)setAppVersion {
+    [self tag:[self generateTagId:@"AppVersion"] value:[GBDeviceUtils version]];
 }
 
 - (void)setRandom {
-    [self tag:[self generateTagId:@"Random"] value:nil];
+    [self tag:[self generateTagId:@"Random"] value:[NSString stringWithFormat:@"%lf", (double)rand() / RAND_MAX]];
+}
+
+- (void)setAdvertisingId:(NSString *)idfa {
+    [self tag:[self generateTagId:@"AdvertisingID"] value:idfa];
 }
 
 - (void) setDeviceTags {
-    
-    if ([GBDeviceUtils model]) {
-        [self tag:@"Device" value:[GBDeviceUtils model]];
-    }
-    if ([GBDeviceUtils os]) {
-        [self tag:@"OS" value:[GBDeviceUtils os]];
-    }
-    if ([GBDeviceUtils language]) {
-        [self tag:@"Language" value:[GBDeviceUtils language]];
-    }
-    if ([GBDeviceUtils timeZone]) {
-        [self tag:@"Time Zone" value:[GBDeviceUtils timeZone]];
-    }
-    if ([GBDeviceUtils version]) {
-        [self tag:@"Version" value:[GBDeviceUtils version]];
-    }
-    if ([GBDeviceUtils build]) {
-        [self tag:@"Build" value:[GBDeviceUtils build]];
-    }
-    
+    [self setOS];
+    [self setLanguage];
+    [self setTimeZone];
+    [self setTimeZoneOffset];
+    [self setAppVersion];
 }
 
 - (NSString *)generateEventId:(NSString *)name {
