@@ -110,7 +110,7 @@ static NSString *const kGAGeneralTag = @"General";
         GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] waitClient] id] eventId:eventId properties:properties credentialId:credentialId];
         if(clientEvent) {
             [GAClientEvent save:clientEvent];
-            [logger info:@"Tracking event success. (id: %@)", clientEvent.id];
+            [logger info:@"Tracking event success. (id: %@, eventId: %@)", clientEvent.id, eventId];
         }
     
     });
@@ -139,7 +139,7 @@ static NSString *const kGAGeneralTag = @"General";
         GAClientTag *clientTag = [GAClientTag createWithClientId:[[[GrowthbeatCore sharedInstance] waitClient] id] tagId:tagId value:value credentialId:credentialId];
         if(clientTag) {
             [GAClientTag save:clientTag];
-            [logger info:@"Setting tag success."];
+            [logger info:@"Setting tag success. (tagId: %@)", tagId];
         }
         
     });
