@@ -52,7 +52,6 @@
 - (void)setLebel:(NSString *)level;
 - (void)setName:(NSString *)name;
 - (void)setLanguage:(NSString *)language;
-- (void)setLocale:(NSString *)locale;
 - (void)setOS:(NSString *)os;
 - (void)setTimeZone:(NSString *)timezone;
 - (void)setAppVersion:(NSString *)appVersion;
@@ -60,7 +59,7 @@
 
 - (void)open;
 - (void)close;
-- (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product;
+- (void)purchase:(int)price setCategory:(NSString *)category setProduct:(NSString *)product;
 
 - (void) setDeviceTags;
 

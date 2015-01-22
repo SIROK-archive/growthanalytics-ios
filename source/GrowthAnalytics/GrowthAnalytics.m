@@ -146,54 +146,6 @@ static NSString *const kGAGeneralTag = @"General";
     
 }
 
-- (void)setUserId:(NSString *)userId {
-    [self tag:[NSString stringWithFormat:@"%@:UserId", kGAGeneralTag] value:userId];
-}
-
-- (void)setAdvertisingId:(NSString *)idfa {
-    [self tag:[NSString stringWithFormat:@"%@:AdvertisingId", kGAGeneralTag] value:idfa];
-}
-
-//- (void)setAge:(NSInteger) age {
-//    [self tag:[NSString stringWithFormat:@"%@:age", kGAGeneralTag] value:[[NSString alloc] initWithFormat:@"%d", age]];
-//}
-
-- (void)setGender:(NSString *)gender {
-    [self tag:[NSString stringWithFormat:@"%@:Gender", kGAGeneralTag] value:gender];
-}
-
-- (void)setLebel:(NSString *)level {
-    [self tag:[NSString stringWithFormat:@"%@:Level", kGAGeneralTag] value:level];
-}
-
-- (void)setName:(NSString *)name {
-    [self tag:[NSString stringWithFormat:@"%@:Name", kGAGeneralTag] value:name];
-}
-
-- (void)setLanguage:(NSString *)language {
-    [self tag:[NSString stringWithFormat:@"%@:Language", kGAGeneralTag] value:language];
-}
-
-- (void)setLocale:(NSString *)locale {
-    [self tag:[NSString stringWithFormat:@"%@:Locale", kGAGeneralTag] value:locale];
-}
-
-- (void)setOS:(NSString *)os {
-    [self tag:[NSString stringWithFormat:@"%@:OS", kGAGeneralTag] value:os];
-}
-
-- (void)setTimeZone:(NSString *)timezone {
-    [self tag:[NSString stringWithFormat:@"%@:TimeZone", kGAGeneralTag] value:timezone];
-}
-
-- (void)setAppVersion:(NSString *)appVersion {
-    [self tag:[NSString stringWithFormat:@"%@:AppVersion", kGAGeneralTag] value:appVersion];
-}
-
-- (void)setDevelopment {
-    [self tag:[NSString stringWithFormat:@"%@:Development", kGAGeneralTag] value:nil];
-}
-
 - (void)open {
     NSDictionary *properties = [[NSDictionary alloc] init];
     [properties setValue:nil forKey:@"referrer"];
@@ -211,14 +163,65 @@ static NSString *const kGAGeneralTag = @"General";
     [self track:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
-- (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product {
+- (void)purchase:(int)price setCategory:(NSString *)category setProduct:(NSString *)product {
     NSDictionary *properties = [[NSDictionary alloc] init];
-    [properties setValue:[[NSString alloc] initWithFormat:@"%ld", price] forKey:@"price"];
+    [properties setValue:[[NSString alloc] initWithFormat:@"%d", price] forKey:@"price"];
     [properties setValue:@"Caegory" forKey:category];
     [properties setValue:@"Product" forKey:product];
     [self track:[NSString stringWithFormat:@"%@:Purchase", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
+- (void)setUserId:(NSString *)userId {
+    [self tag:[self generateTagId:@"UserId"] value:userId];
+}
+
+- (void)setAdvertisingId:(NSString *)idfa {
+    [self tag:[self generateTagId:@"AdvertisingID"] value:idfa];
+}
+
+- (void)setAge:(int)age {
+    [self tag:[self generateTagId:@"Age"] value:[NSString stringWithFormat:@"%d", age]];
+}
+
+- (void)setGender:(NSString *)gender {
+    [self tag:[self generateTagId:@"Gender"] value:gender];
+}
+
+- (void)setLebel:(NSString *)level {
+    [self tag:[self generateTagId:@"Level"] value:level];
+}
+
+- (void)setName:(NSString *)name {
+    [self tag:[self generateTagId:@"Name"] value:name];
+}
+
+- (void)setLanguage:(NSString *)language {
+    [self tag:[self generateTagId:@"Language"] value:language];
+}
+
+- (void)setOS:(NSString *)os {
+    [self tag:[self generateTagId:@"OS"] value:os];
+}
+
+- (void)setTimeZone:(NSString *)timezone {
+    [self tag:[self generateTagId:@"TimeZone"] value:timezone];
+}
+
+- (void)setTimeZoneOffset:(NSString *)timezoneOffset {
+    [self tag:[self generateTagId:@"TimeZoneOffset"] value:timezoneOffset];
+}
+
+- (void)setAppVersion:(NSString *)appVersion {
+    [self tag:[self generateTagId:@"AppVersion"] value:appVersion];
+}
+
+- (void)setDevelopment {
+    [self tag:[self generateTagId:@"Development"] value:nil];
+}
+
+- (void)setRandom {
+    [self tag:[self generateTagId:@"Random"] value:nil];
+}
 
 - (void) setDeviceTags {
     
@@ -241,6 +244,14 @@ static NSString *const kGAGeneralTag = @"General";
         [self tag:@"Build" value:[GBDeviceUtils build]];
     }
     
+}
+
+- (NSString *)generateEventId:(NSString *)name {
+    return [NSString stringWithFormat:@"Event:%@:Default:%@", applicationId, name];
+}
+
+- (NSString *)generateTagId:(NSString *)name {
+    return [NSString stringWithFormat:@"Tag:%@:Default:%@", applicationId, name];
 }
 
 @end
