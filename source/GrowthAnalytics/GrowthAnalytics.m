@@ -147,28 +147,26 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)open {
-    NSDictionary *properties = [[NSDictionary alloc] init];
-    [properties setValue:nil forKey:@"referrer"];
-    [self track:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
+    [self track:[self generateEventId:@"Open"]];
+    [self track:[self generateEventId:@"Install"] option:GATrackOptionOnce];
 }
 
 - (void)close {
-    GAClientEvent *event = [GAClientEvent load:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag]];
-    NSDictionary *properties = nil;
-    if(event) {
-        NSTimeInterval interval = [[event created] timeIntervalSinceNow];
-        properties = [[NSDictionary alloc] init];
-        [properties setValue:[[NSString alloc] initWithFormat:@"%f", interval] forKey:@"Time"];
-    }
-    [self track:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
+    GAClientEvent *openEvent = [GAClientEvent load:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag]];
+    if(!openEvent)
+        return;
+    NSTimeInterval interval = -1 * [[openEvent created] timeIntervalSinceNow];
+    [self track:[self generateEventId:@"Close"] properties:@{
+        @"time": [NSString stringWithFormat:@"%d", (int)interval]
+    }];
 }
 
 - (void)purchase:(int)price setCategory:(NSString *)category setProduct:(NSString *)product {
-    NSDictionary *properties = [[NSDictionary alloc] init];
-    [properties setValue:[[NSString alloc] initWithFormat:@"%d", price] forKey:@"price"];
-    [properties setValue:@"Caegory" forKey:category];
-    [properties setValue:@"Product" forKey:product];
-    [self track:[NSString stringWithFormat:@"%@:Purchase", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
+    [self track:[self generateEventId:@"Purchase"] properties:@{
+        @"price": [NSString stringWithFormat:@"%d", price],
+        @"category": category,
+        @"product": product
+    }];
 }
 
 - (void)setUserId:(NSString *)userId {
