@@ -45,6 +45,7 @@ typedef NS_ENUM (NSInteger, GAGender) {
 - (void)setGender:(GAGender)gender;
 - (void)setLevel:(int)level;
 - (void)setDevelopment:(BOOL)development;
+- (void)setDeviceModel;
 - (void)setOS;
 - (void)setLanguage;
 - (void)setTimeZone;
@@ -52,7 +53,7 @@ typedef NS_ENUM (NSInteger, GAGender) {
 - (void)setAppVersion;
 - (void)setRandom;
 - (void)setAdvertisingId:(NSString *)idfa;
-- (void) setDeviceTags;
+- (void)setBasicTags;
 
 - (GBLogger *)logger;
 - (GBHttpClient *)httpClient;

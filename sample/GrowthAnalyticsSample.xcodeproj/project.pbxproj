@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2070A841A7092640005E645 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2070A831A7092640005E645 /* SystemConfiguration.framework */; };
 		B20AD24C1A0C3B78003ABF66 /* GrowthbeatCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20AD24B1A0C3B78003ABF66 /* GrowthbeatCore.framework */; };
 		B24052211A0B421900AFECE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B24052201A0B421900AFECE1 /* main.m */; };
 		B24052241A0B421900AFECE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B24052231A0B421900AFECE1 /* AppDelegate.m */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B2070A831A7092640005E645 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B20AD24B1A0C3B78003ABF66 /* GrowthbeatCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthbeatCore.framework; path = "../submodules/growthbeat-core-ios/GrowthbeatCore.framework"; sourceTree = "<group>"; };
 		B240521B1A0B421900AFECE1 /* GrowthAnalyticsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowthAnalyticsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B240521F1A0B421900AFECE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2070A841A7092640005E645 /* SystemConfiguration.framework in Frameworks */,
 				B20AD24C1A0C3B78003ABF66 /* GrowthbeatCore.framework in Frameworks */,
 				B24E5E7D1A0B42AC000DAFE2 /* GrowthAnalytics.framework in Frameworks */,
 			);
@@ -131,6 +134,7 @@
 			children = (
 				B20AD24B1A0C3B78003ABF66 /* GrowthbeatCore.framework */,
 				B24E5E7C1A0B42AC000DAFE2 /* GrowthAnalytics.framework */,
+				B2070A831A7092640005E645 /* SystemConfiguration.framework */,
 			);
 			name = Framework;
 			sourceTree = "<group>";

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <AdSupport/AdSupport.h>
 
 @interface AppDelegate ()
 
@@ -15,8 +16,15 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     [[GrowthAnalytics sharedInstance] initializeWithApplicationId:@"dy6VlRMnN3juhW9L" credentialId:@"NuvkVhQtRDG2nrNeDzHXzZO5c6j0Xu5t"];
-    [[GrowthAnalytics sharedInstance] setDeviceTags];
+    
+    [[GrowthAnalytics sharedInstance] setBasicTags];
+    
+    ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
+    if ([identifierManager isAdvertisingTrackingEnabled])
+        [[GrowthAnalytics sharedInstance] setAdvertisingId:identifierManager.advertisingIdentifier.UUIDString];
+
     return YES;
 }
 

@@ -202,6 +202,10 @@ static NSString *const kGAGeneralTag = @"General";
     [self tag:[self generateTagId:@"Development"] value:development?@"true":@"false"];
 }
 
+- (void)setDeviceModel {
+    [self tag:[self generateTagId:@"DeviceModel"] value:[GBDeviceUtils model]];
+}
+
 - (void)setOS {
     [self tag:[self generateTagId:@"OS"] value:[GBDeviceUtils os]];
 }
@@ -230,7 +234,8 @@ static NSString *const kGAGeneralTag = @"General";
     [self tag:[self generateTagId:@"AdvertisingID"] value:idfa];
 }
 
-- (void) setDeviceTags {
+- (void)setBasicTags {
+    [self setDeviceModel];
     [self setOS];
     [self setLanguage];
     [self setTimeZone];
