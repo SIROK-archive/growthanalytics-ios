@@ -227,7 +227,9 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)setRandom {
-    [self tag:[self generateTagId:@"Random"] value:[NSString stringWithFormat:@"%lf", (double)rand() / RAND_MAX]];
+    srand((unsigned) time(NULL));
+    double random = (double)rand() / RAND_MAX;
+    [self tag:[self generateTagId:@"Random"] value:[NSString stringWithFormat:@"%lf", random]];
 }
 
 - (void)setAdvertisingId:(NSString *)idfa {
