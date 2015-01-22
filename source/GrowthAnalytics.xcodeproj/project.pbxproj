@@ -22,7 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		B2070A821A70822E0005E645 /* GATrackOption.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C13AAB161A1C8E1F00BE2FD1 /* GATrackOption.h */; };
 		B24051B31A0B31D300AFECE1 /* GrowthAnalytics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051B21A0B31D300AFECE1 /* GrowthAnalytics.h */; };
 		B24051B51A0B31D300AFECE1 /* GrowthAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051B41A0B31D300AFECE1 /* GrowthAnalytics.m */; };
 		B24051BB1A0B31D300AFECE1 /* libGrowthAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051AF1A0B31D300AFECE1 /* libGrowthAnalytics.a */; };
@@ -57,7 +56,6 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
-				B2070A821A70822E0005E645 /* GATrackOption.h in CopyFiles */,
 				B24052051A0B35EF00AFECE1 /* GAClientEvent.h in CopyFiles */,
 				B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */,
 				B24051B31A0B31D300AFECE1 /* GrowthAnalytics.h in CopyFiles */,
@@ -77,7 +75,6 @@
 		B24051CE1A0B322E00AFECE1 /* GAClientTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTag.h; sourceTree = "<group>"; };
 		B24051CF1A0B322E00AFECE1 /* GAClientTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientTag.m; sourceTree = "<group>"; };
 		B24051DE1A0B326300AFECE1 /* GrowthbeatCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthbeatCore.framework; path = "../submodules/growthbeat-core-ios/GrowthbeatCore.framework"; sourceTree = "<group>"; };
-		C13AAB161A1C8E1F00BE2FD1 /* GATrackOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GATrackOption.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +154,6 @@
 			children = (
 				B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */,
 				B24051CE1A0B322E00AFECE1 /* GAClientTag.h */,
-				C13AAB161A1C8E1F00BE2FD1 /* GATrackOption.h */,
 				B24051B21A0B31D300AFECE1 /* GrowthAnalytics.h */,
 			);
 			name = Headers;

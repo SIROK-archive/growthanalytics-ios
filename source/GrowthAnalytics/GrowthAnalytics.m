@@ -181,8 +181,17 @@ static NSString *const kGAGeneralTag = @"General";
     [self tag:[self generateTagId:@"Age"] value:[NSString stringWithFormat:@"%d", age]];
 }
 
-- (void)setGender:(NSString *)gender {
-    [self tag:[self generateTagId:@"Gender"] value:gender];
+- (void)setGender:(GAGender)gender {
+    switch (gender) {
+        case GAGenderMale:
+            [self tag:[self generateTagId:@"Gender"] value:@"male"];
+            break;
+        case GAGenderFemale:
+            [self tag:[self generateTagId:@"Gender"] value:@"female"];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)setLevel:(int)level {

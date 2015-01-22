@@ -8,7 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "GrowthbeatCore.h"
-#import "GATrackOption.h"
+
+typedef NS_ENUM (NSInteger, GATrackOption) {
+    GATrackOptionDefault = 0,
+    GATrackOptionOnce,
+    GATrackOptionCounter
+};
+
+typedef NS_ENUM (NSInteger, GAGender) {
+    GAGenderNone = 0,
+    GAGenderMale,
+    GAGenderFemale
+};
 
 @interface GrowthAnalytics : NSObject
 
@@ -31,7 +42,7 @@
 - (void)setUserId:(NSString *)userId;
 - (void)setName:(NSString *)name;
 - (void)setAge:(int)age;
-- (void)setGender:(NSString *)gender;
+- (void)setGender:(GAGender)gender;
 - (void)setLevel:(int)level;
 - (void)setDevelopment:(BOOL)development;
 - (void)setOS;
