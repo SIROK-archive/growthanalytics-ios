@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[GrowthAnalytics sharedInstance] initializeWithApplicationId:@"dy6VlRMnN3juhW9L" credentialId:@"NuvkVhQtRDG2nrNeDzHXzZO5c6j0Xu5t"];
+    [[GrowthAnalytics sharedInstance] initializeWithApplicationId:@"OyTg8vZd4KTNQDJ5" credentialId:@"3EKydeJ0imxJ5WqS22FJfdVamFLgu7XA"];
     
     [[GrowthAnalytics sharedInstance] setBasicTags];
     

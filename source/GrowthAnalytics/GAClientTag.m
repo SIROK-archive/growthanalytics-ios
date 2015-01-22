@@ -38,7 +38,7 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
     GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
     if(!httpResponse.success){
-        [[[GrowthAnalytics sharedInstance] logger] error:@"Filed to create client tag. %@", httpResponse.error];
+        [[[GrowthAnalytics sharedInstance] logger] error:@"Failed to create client tag. %@", httpResponse.error?httpResponse.error:[httpResponse.body objectForKey:@"message"]];
         return nil;
     }
     
