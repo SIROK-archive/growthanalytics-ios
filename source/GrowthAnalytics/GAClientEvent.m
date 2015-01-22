@@ -42,7 +42,6 @@
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
     GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
     if(!httpResponse.success){
-        NSLog(@"body: %@", httpResponse.body);
         [[[GrowthAnalytics sharedInstance] logger] error:@"Failed to create client event. %@", httpResponse.error?httpResponse.error:[httpResponse.body objectForKey:@"message"]];
         return nil;
     }
@@ -52,7 +51,9 @@
 }
 
 + (void) save:(GAClientEvent *)clientEvent {
-    [[[GrowthAnalytics sharedInstance] preference] setObject:clientEvent forKey:clientEvent.eventId];
+    if (clientEvent && clientEvent.eventId){
+        [[[GrowthAnalytics sharedInstance] preference] setObject:clientEvent forKey:clientEvent.eventId];
+    }
 }
 
 + (GAClientEvent *) load:(NSString *)eventId {

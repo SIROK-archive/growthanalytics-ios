@@ -49,7 +49,9 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
 }
 
 + (void) save:(GAClientTag *)clientTag {
-    [[[GrowthAnalytics sharedInstance] preference] setObject:clientTag forKey:clientTag.tagId];
+    if (clientTag && clientTag.tagId) {
+        [[[GrowthAnalytics sharedInstance] preference] setObject:clientTag forKey:clientTag.tagId];
+    }
 }
 
 + (GAClientTag *) load:(NSString *)tagId {
