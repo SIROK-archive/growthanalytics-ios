@@ -43,6 +43,7 @@
  * @param tagId Tag ID
  * @param value value for the tag
  */
+- (void)tag:(NSString *)tagId;
 - (void)tag:(NSString *)tagId value:(NSString *)value;
 
 - (void)setUserId:(NSString *)userId;
