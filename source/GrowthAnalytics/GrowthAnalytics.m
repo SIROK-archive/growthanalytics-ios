@@ -74,45 +74,54 @@ static NSString *const kGAGeneralTag = @"General";
     
 }
 
-- (void)trackEvent:(NSString *)eventId {
-    [self trackEvent:eventId properties:nil option:GATrackOptionDefault];
+- (void)track:(NSString *)eventId {
+    [self track:eventId properties:nil option:GATrackOptionDefault];
 }
 
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties {
-    [self trackEvent:eventId properties:properties option:GATrackOptionDefault];
+- (void)track:(NSString *)eventId properties:(NSDictionary *)properties {
+    [self track:eventId properties:properties option:GATrackOptionDefault];
 }
 
-- (void)trackEvent:(NSString *)eventId option:(GATrackOption)option {
-    [self trackEvent:eventId properties:nil option:option];
+- (void)track:(NSString *)eventId option:(GATrackOption)option {
+    [self track:eventId properties:nil option:option];
 }
 
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option {
+- (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
-        if ((option & GATrackOptionOnce) && [GAClientEvent load:eventId]) {
-            [logger info:@"Already exists Track event. (eventId: %@, properties: %@)", eventId, properties];
-            return;
+        
+        int counter = 0;
+        GAClientEvent *existingClientEvent = [GAClientEvent load:eventId];
+        
+        if (existingClientEvent) {
+            if (option == GATrackOptionOnce) {
+                [logger info:@"Event already sent with once option. (eventId: %@)", eventId];
+                return;
+            }
+            counter = [[existingClientEvent.properties objectForKey:@"counter"] intValue];
         }
         
-        if ((option & GATrackOptionCounter) && ![GAClientEvent load:eventId]) {
-            [properties setValue:@"first_time" forKey:@""];
+        if (option == GATrackOptionCounter) {
+            [properties setValue:[NSString stringWithFormat:@"%d", counter] forKey:@"counter"];
         }
         
         GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] client] id] eventId:eventId properties:properties];
         if(clientEvent) {
-            [logger info:@"Tracking event success. (clientEventId: %@)", clientEvent.id];
-            if ((option == GATrackOptionOnce) && (option == GATrackOptionCounter) && ![GAClientEvent load:eventId]) {
-                [GAClientEvent save:clientEvent];
-            }
+            [GAClientEvent save:clientEvent];
+            [logger info:@"Tracking event success. (id: %@)", clientEvent.id];
         }
     
     });
 
 }
 
-- (void)setTag:(NSString *)tagId value:(NSString *)value {
+- (void)tag:(NSString *)tagId {
+    [self tag:tagId value:nil];
+}
+
+- (void)tag:(NSString *)tagId value:(NSString *)value {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
@@ -139,57 +148,57 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)setUserId:(NSString *)userId {
-    [self setTag:[NSString stringWithFormat:@"%@:UserId", kGAGeneralTag] value:userId];
+    [self tag:[NSString stringWithFormat:@"%@:UserId", kGAGeneralTag] value:userId];
 }
 
 - (void)setAdvertisingId:(NSString *)idfa {
-    [self setTag:[NSString stringWithFormat:@"%@:AdvertisingId", kGAGeneralTag] value:idfa];
+    [self tag:[NSString stringWithFormat:@"%@:AdvertisingId", kGAGeneralTag] value:idfa];
 }
 
 //- (void)setAge:(NSInteger) age {
-//    [self setTag:[NSString stringWithFormat:@"%@:age", kGAGeneralTag] value:[[NSString alloc] initWithFormat:@"%d", age]];
+//    [self tag:[NSString stringWithFormat:@"%@:age", kGAGeneralTag] value:[[NSString alloc] initWithFormat:@"%d", age]];
 //}
 
 - (void)setGender:(NSString *)gender {
-    [self setTag:[NSString stringWithFormat:@"%@:Gender", kGAGeneralTag] value:gender];
+    [self tag:[NSString stringWithFormat:@"%@:Gender", kGAGeneralTag] value:gender];
 }
 
 - (void)setLebel:(NSString *)level {
-    [self setTag:[NSString stringWithFormat:@"%@:Level", kGAGeneralTag] value:level];
+    [self tag:[NSString stringWithFormat:@"%@:Level", kGAGeneralTag] value:level];
 }
 
 - (void)setName:(NSString *)name {
-    [self setTag:[NSString stringWithFormat:@"%@:Name", kGAGeneralTag] value:name];
+    [self tag:[NSString stringWithFormat:@"%@:Name", kGAGeneralTag] value:name];
 }
 
 - (void)setLanguage:(NSString *)language {
-    [self setTag:[NSString stringWithFormat:@"%@:Language", kGAGeneralTag] value:language];
+    [self tag:[NSString stringWithFormat:@"%@:Language", kGAGeneralTag] value:language];
 }
 
 - (void)setLocale:(NSString *)locale {
-    [self setTag:[NSString stringWithFormat:@"%@:Locale", kGAGeneralTag] value:locale];
+    [self tag:[NSString stringWithFormat:@"%@:Locale", kGAGeneralTag] value:locale];
 }
 
 - (void)setOS:(NSString *)os {
-    [self setTag:[NSString stringWithFormat:@"%@:OS", kGAGeneralTag] value:os];
+    [self tag:[NSString stringWithFormat:@"%@:OS", kGAGeneralTag] value:os];
 }
 
 - (void)setTimeZone:(NSString *)timezone {
-    [self setTag:[NSString stringWithFormat:@"%@:TimeZone", kGAGeneralTag] value:timezone];
+    [self tag:[NSString stringWithFormat:@"%@:TimeZone", kGAGeneralTag] value:timezone];
 }
 
 - (void)setAppVersion:(NSString *)appVersion {
-    [self setTag:[NSString stringWithFormat:@"%@:AppVersion", kGAGeneralTag] value:appVersion];
+    [self tag:[NSString stringWithFormat:@"%@:AppVersion", kGAGeneralTag] value:appVersion];
 }
 
 - (void)setDevelopment {
-    [self setTag:[NSString stringWithFormat:@"%@:Development", kGAGeneralTag] value:nil];
+    [self tag:[NSString stringWithFormat:@"%@:Development", kGAGeneralTag] value:nil];
 }
 
 - (void)open {
     NSDictionary *properties = [[NSDictionary alloc] init];
     [properties setValue:nil forKey:@"referrer"];
-    [self trackEvent:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
+    [self track:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
 - (void)close {
@@ -200,7 +209,7 @@ static NSString *const kGAGeneralTag = @"General";
         properties = [[NSDictionary alloc] init];
         [properties setValue:[[NSString alloc] initWithFormat:@"%f", interval] forKey:@"Time"];
     }
-    [self trackEvent:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
+    [self track:[NSString stringWithFormat:@"%@:Close", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
 - (void)purchase:(NSInteger)price setCategory:(NSString *)category setProduct:(NSString *)product {
@@ -208,29 +217,29 @@ static NSString *const kGAGeneralTag = @"General";
     [properties setValue:[[NSString alloc] initWithFormat:@"%ld", price] forKey:@"price"];
     [properties setValue:@"Caegory" forKey:category];
     [properties setValue:@"Product" forKey:product];
-    [self trackEvent:[NSString stringWithFormat:@"%@:Purchase", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
+    [self track:[NSString stringWithFormat:@"%@:Purchase", kGAGeneralTag] properties:properties option:GATrackOptionDefault];
 }
 
 
 - (void) setDeviceTags {
     
     if ([GBDeviceUtils model]) {
-        [self setTag:@"Device" value:[GBDeviceUtils model]];
+        [self tag:@"Device" value:[GBDeviceUtils model]];
     }
     if ([GBDeviceUtils os]) {
-        [self setTag:@"OS" value:[GBDeviceUtils os]];
+        [self tag:@"OS" value:[GBDeviceUtils os]];
     }
     if ([GBDeviceUtils language]) {
-        [self setTag:@"Language" value:[GBDeviceUtils language]];
+        [self tag:@"Language" value:[GBDeviceUtils language]];
     }
     if ([GBDeviceUtils timeZone]) {
-        [self setTag:@"Time Zone" value:[GBDeviceUtils timeZone]];
+        [self tag:@"Time Zone" value:[GBDeviceUtils timeZone]];
     }
     if ([GBDeviceUtils version]) {
-        [self setTag:@"Version" value:[GBDeviceUtils version]];
+        [self tag:@"Version" value:[GBDeviceUtils version]];
     }
     if ([GBDeviceUtils build]) {
-        [self setTag:@"Build" value:[GBDeviceUtils build]];
+        [self tag:@"Build" value:[GBDeviceUtils build]];
     }
     
 }

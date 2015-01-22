@@ -32,10 +32,10 @@
  * @param eventId Event ID
  * @param properties properties for the tracking
  */
-- (void)trackEvent:(NSString *)eventId;
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties;
-- (void)trackEvent:(NSString *)eventId option:(GATrackOption)option;
-- (void)trackEvent:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option;
+- (void)track:(NSString *)eventId;
+- (void)track:(NSString *)eventId properties:(NSDictionary *)properties;
+- (void)track:(NSString *)eventId option:(GATrackOption)option;
+- (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option;
 
 /**
  * Set tag
@@ -43,7 +43,7 @@
  * @param tagId Tag ID
  * @param value value for the tag
  */
-- (void)setTag:(NSString *)tagId value:(NSString *)value;
+- (void)tag:(NSString *)tagId value:(NSString *)value;
 
 - (void)setUserId:(NSString *)userId;
 - (void)setAdvertisingId:(NSString *)idfa;
