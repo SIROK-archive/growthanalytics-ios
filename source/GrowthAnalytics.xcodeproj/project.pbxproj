@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B2070A821A70822E0005E645 /* GATrackOption.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C13AAB161A1C8E1F00BE2FD1 /* GATrackOption.h */; };
 		B24051B31A0B31D300AFECE1 /* GrowthAnalytics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051B21A0B31D300AFECE1 /* GrowthAnalytics.h */; };
 		B24051B51A0B31D300AFECE1 /* GrowthAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051B41A0B31D300AFECE1 /* GrowthAnalytics.m */; };
 		B24051BB1A0B31D300AFECE1 /* libGrowthAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051AF1A0B31D300AFECE1 /* libGrowthAnalytics.a */; };
@@ -56,6 +57,7 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				B2070A821A70822E0005E645 /* GATrackOption.h in CopyFiles */,
 				B24052051A0B35EF00AFECE1 /* GAClientEvent.h in CopyFiles */,
 				B24052071A0B35EF00AFECE1 /* GAClientTag.h in CopyFiles */,
 				B24051B31A0B31D300AFECE1 /* GrowthAnalytics.h in CopyFiles */,

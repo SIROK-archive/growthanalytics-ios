@@ -12,39 +12,21 @@
 
 @interface GrowthAnalytics : NSObject
 
-/**
- * Get shared instance of GrowthAnalytics
- *
- */
 + (GrowthAnalytics *) sharedInstance;
 
-/**
- * Initialize GrowthAnalytics instance
- *
- * @param applicationId Application ID
- * @param credentialId Credential ID for the application
- */
 - (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
 
-/**
- * Track event
- *
- * @param eventId Event ID
- * @param properties properties for the tracking
- */
 - (void)track:(NSString *)eventId;
 - (void)track:(NSString *)eventId properties:(NSDictionary *)properties;
 - (void)track:(NSString *)eventId option:(GATrackOption)option;
 - (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option;
 
-/**
- * Set tag
- *
- * @param tagId Tag ID
- * @param value value for the tag
- */
 - (void)tag:(NSString *)tagId;
 - (void)tag:(NSString *)tagId value:(NSString *)value;
+
+- (void)open;
+- (void)close;
+- (void)purchase:(int)price setCategory:(NSString *)category setProduct:(NSString *)product;
 
 - (void)setUserId:(NSString *)userId;
 - (void)setName:(NSString *)name;
@@ -60,10 +42,6 @@
 - (void)setRandom;
 - (void)setAdvertisingId:(NSString *)idfa;
 - (void) setDeviceTags;
-
-- (void)open;
-- (void)close;
-- (void)purchase:(int)price setCategory:(NSString *)category setProduct:(NSString *)product;
 
 - (GBLogger *)logger;
 - (GBHttpClient *)httpClient;
