@@ -219,7 +219,7 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)setTimeZoneOffset {
-    [self tag:[self generateTagId:@"TimeZoneOffset"] value:[GBDeviceUtils timeZoneOffset]];
+    [self tag:[self generateTagId:@"TimeZoneOffset"] value:[NSString stringWithFormat:@"%ld", (long)[GBDeviceUtils timeZoneOffset]]];
 }
 
 - (void)setAppVersion {
