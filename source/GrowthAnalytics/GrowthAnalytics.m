@@ -90,27 +90,30 @@ static NSString *const kGAGeneralTag = @"General";
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        [logger info:@"Track event... (eventId: %@, properties: %@)", eventId, properties];
+        [logger info:@"Track event... (eventId: %@)", eventId];
         
-        int counter = 0;
+        NSMutableDictionary *processedProperties = [NSMutableDictionary dictionaryWithDictionary:properties];
+        
         GAClientEvent *existingClientEvent = [GAClientEvent load:eventId];
         
-        if (existingClientEvent) {
-            if (option == GATrackOptionOnce) {
+        if (option == GATrackOptionOnce) {
+            if (existingClientEvent) {
                 [logger info:@"Event already sent with once option. (eventId: %@)", eventId];
                 return;
             }
-            counter = [[existingClientEvent.properties objectForKey:@"counter"] intValue];
         }
         
         if (option == GATrackOptionCounter) {
-            [properties setValue:[NSString stringWithFormat:@"%d", counter] forKey:@"counter"];
+            int counter = 0;
+            if(existingClientEvent && existingClientEvent.properties)
+                counter = [[existingClientEvent.properties objectForKey:@"counter"] intValue];
+            [processedProperties setValue:[NSString stringWithFormat:@"%d", (counter + 1)] forKey:@"counter"];
         }
         
-        GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] waitClient] id] eventId:eventId properties:properties credentialId:credentialId];
+        GAClientEvent *clientEvent = [GAClientEvent createWithClientId:[[[GrowthbeatCore sharedInstance] waitClient] id] eventId:eventId properties:processedProperties credentialId:credentialId];
         if(clientEvent) {
             [GAClientEvent save:clientEvent];
-            [logger info:@"Tracking event success. (id: %@, eventId: %@)", clientEvent.id, eventId];
+            [logger info:@"Tracking event success. (id: %@, eventId: %@, properties: %@)", clientEvent.id, eventId, processedProperties];
         }
     
     });
@@ -147,7 +150,7 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)open {
-    [self track:[self generateEventId:@"Open"]];
+    [self track:[self generateEventId:@"Open"] option:GATrackOptionCounter];
     [self track:[self generateEventId:@"Install"] option:GATrackOptionOnce];
 }
 
