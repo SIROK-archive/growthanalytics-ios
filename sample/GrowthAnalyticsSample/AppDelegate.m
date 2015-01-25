@@ -19,8 +19,6 @@
     
     [[GrowthAnalytics sharedInstance] initializeWithApplicationId:@"OyTg8vZd4KTNQDJ5" credentialId:@"3EKydeJ0imxJ5WqS22FJfdVamFLgu7XA"];
     
-    [[GrowthAnalytics sharedInstance] setBasicTags];
-    
     ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
     if ([identifierManager isAdvertisingTrackingEnabled])
         [[GrowthAnalytics sharedInstance] setAdvertisingId:identifierManager.advertisingIdentifier.UUIDString];
@@ -30,6 +28,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [[GrowthAnalytics sharedInstance] open];
+    [[GrowthAnalytics sharedInstance] setBasicTags];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
