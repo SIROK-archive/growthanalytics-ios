@@ -15,8 +15,6 @@ static NSString *const kGBLoggerDefaultTag = @"GrowthAnalytics";
 static NSString *const kGBHttpClientDefaultBaseUrl = @"https://api.analytics.growthbeat.com/";
 static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferences";
 
-static NSString *const kGAGeneralTag = @"General";
-
 @interface GrowthAnalytics () {
     
     GBLogger *logger;
@@ -155,10 +153,10 @@ static NSString *const kGAGeneralTag = @"General";
 }
 
 - (void)close {
-    GAClientEvent *openEvent = [GAClientEvent load:[NSString stringWithFormat:@"%@:Open", kGAGeneralTag]];
+    GAClientEvent *openEvent = [GAClientEvent load:[self generateEventId:@"Open"]];
     if(!openEvent)
         return;
-    NSTimeInterval interval = -1 * [[openEvent created] timeIntervalSinceNow];
+    NSTimeInterval interval = -1 * [[openEvent created] timeIntervalSinceNow] * 1000;
     [self track:[self generateEventId:@"Close"] properties:@{
         @"time": [NSString stringWithFormat:@"%d", (int)interval]
     }];
