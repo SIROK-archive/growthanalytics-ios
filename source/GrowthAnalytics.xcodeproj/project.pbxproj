@@ -24,7 +24,6 @@
 /* Begin PBXBuildFile section */
 		B24051B31A0B31D300AFECE1 /* GrowthAnalytics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24051B21A0B31D300AFECE1 /* GrowthAnalytics.h */; };
 		B24051B51A0B31D300AFECE1 /* GrowthAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051B41A0B31D300AFECE1 /* GrowthAnalytics.m */; };
-		B24051BB1A0B31D300AFECE1 /* libGrowthAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051AF1A0B31D300AFECE1 /* libGrowthAnalytics.a */; };
 		B24051D61A0B322E00AFECE1 /* GAClientEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051CB1A0B322E00AFECE1 /* GAClientEvent.m */; };
 		B24051D81A0B322E00AFECE1 /* GAClientTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B24051CF1A0B322E00AFECE1 /* GAClientTag.m */; };
 		B24051DF1A0B326300AFECE1 /* GrowthbeatCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24051DE1A0B326300AFECE1 /* GrowthbeatCore.framework */; };
@@ -33,13 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B24051BC1A0B31D300AFECE1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B24051A71A0B31D300AFECE1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B24051AE1A0B31D300AFECE1;
-			remoteInfo = GrowthAnalytics;
-		};
 		B240520F1A0B365800AFECE1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B24051A71A0B31D300AFECE1 /* Project object */;
@@ -68,8 +60,6 @@
 		B24051AF1A0B31D300AFECE1 /* libGrowthAnalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGrowthAnalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24051B21A0B31D300AFECE1 /* GrowthAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GrowthAnalytics.h; sourceTree = "<group>"; };
 		B24051B41A0B31D300AFECE1 /* GrowthAnalytics.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrowthAnalytics.m; sourceTree = "<group>"; };
-		B24051BA1A0B31D300AFECE1 /* GrowthAnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrowthAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B24051C01A0B31D300AFECE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B24051CA1A0B322E00AFECE1 /* GAClientEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientEvent.h; sourceTree = "<group>"; };
 		B24051CB1A0B322E00AFECE1 /* GAClientEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAClientEvent.m; sourceTree = "<group>"; };
 		B24051CE1A0B322E00AFECE1 /* GAClientTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAClientTag.h; sourceTree = "<group>"; };
@@ -86,14 +76,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B24051B71A0B31D300AFECE1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B24051BB1A0B31D300AFECE1 /* libGrowthAnalytics.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -101,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				B24051B11A0B31D300AFECE1 /* GrowthAnalytics */,
-				B24051BE1A0B31D300AFECE1 /* GrowthAnalyticsTests */,
 				B24051C91A0B320900AFECE1 /* Framework */,
 				B24051B01A0B31D300AFECE1 /* Products */,
 			);
@@ -111,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				B24051AF1A0B31D300AFECE1 /* libGrowthAnalytics.a */,
-				B24051BA1A0B31D300AFECE1 /* GrowthAnalyticsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,22 +103,6 @@
 				B24051DD1A0B323900AFECE1 /* Sources */,
 			);
 			path = GrowthAnalytics;
-			sourceTree = "<group>";
-		};
-		B24051BE1A0B31D300AFECE1 /* GrowthAnalyticsTests */ = {
-			isa = PBXGroup;
-			children = (
-				B24051BF1A0B31D300AFECE1 /* Supporting Files */,
-			);
-			path = GrowthAnalyticsTests;
-			sourceTree = "<group>";
-		};
-		B24051BF1A0B31D300AFECE1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B24051C01A0B31D300AFECE1 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		B24051C91A0B320900AFECE1 /* Framework */ = {
@@ -190,24 +154,6 @@
 			productReference = B24051AF1A0B31D300AFECE1 /* libGrowthAnalytics.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		B24051B91A0B31D300AFECE1 /* GrowthAnalyticsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B24051C61A0B31D300AFECE1 /* Build configuration list for PBXNativeTarget "GrowthAnalyticsTests" */;
-			buildPhases = (
-				B24051B61A0B31D300AFECE1 /* Sources */,
-				B24051B71A0B31D300AFECE1 /* Frameworks */,
-				B24051B81A0B31D300AFECE1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B24051BD1A0B31D300AFECE1 /* PBXTargetDependency */,
-			);
-			name = GrowthAnalyticsTests;
-			productName = GrowthAnalyticsTests;
-			productReference = B24051BA1A0B31D300AFECE1 /* GrowthAnalyticsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -218,9 +164,6 @@
 				ORGANIZATIONNAME = "SIROK, Inc.";
 				TargetAttributes = {
 					B24051AE1A0B31D300AFECE1 = {
-						CreatedOnToolsVersion = 6.1;
-					};
-					B24051B91A0B31D300AFECE1 = {
 						CreatedOnToolsVersion = 6.1;
 					};
 					B240520B1A0B364500AFECE1 = {
@@ -241,21 +184,10 @@
 			projectRoot = "";
 			targets = (
 				B24051AE1A0B31D300AFECE1 /* GrowthAnalytics */,
-				B24051B91A0B31D300AFECE1 /* GrowthAnalyticsTests */,
 				B240520B1A0B364500AFECE1 /* GrowthAnalyticsFramework */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		B24051B81A0B31D300AFECE1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		B24052041A0B349700AFECE1 /* ShellScript */ = {
@@ -297,21 +229,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B24051B61A0B31D300AFECE1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B24051BD1A0B31D300AFECE1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B24051AE1A0B31D300AFECE1 /* GrowthAnalytics */;
-			targetProxy = B24051BC1A0B31D300AFECE1 /* PBXContainerItemProxy */;
-		};
 		B24052101A0B365800AFECE1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B24051AE1A0B31D300AFECE1 /* GrowthAnalytics */;
@@ -436,36 +356,6 @@
 			};
 			name = Release;
 		};
-		B24051C71A0B31D300AFECE1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GrowthAnalyticsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		B24051C81A0B31D300AFECE1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GrowthAnalyticsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		B240520D1A0B364500AFECE1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -497,15 +387,6 @@
 			buildConfigurations = (
 				B24051C41A0B31D300AFECE1 /* Debug */,
 				B24051C51A0B31D300AFECE1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B24051C61A0B31D300AFECE1 /* Build configuration list for PBXNativeTarget "GrowthAnalyticsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B24051C71A0B31D300AFECE1 /* Debug */,
-				B24051C81A0B31D300AFECE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
