@@ -20,16 +20,22 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     GBLogger *logger;
     GBHttpClient *httpClient;
     GBPreference *preference;
+    
     NSString *applicationId;
     NSString *credentialId;
+    
+    NSDate *openTime;
     
 }
 
 @property (nonatomic, strong) GBLogger *logger;
 @property (nonatomic, strong) GBHttpClient *httpClient;
 @property (nonatomic, strong) GBPreference *preference;
+
 @property (nonatomic, strong) NSString *applicationId;
 @property (nonatomic, strong) NSString *credentialId;
+
+@property (nonatomic, strong) NSDate *openTime;
 
 @end
 
@@ -37,9 +43,12 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 @synthesize logger;
 @synthesize httpClient;
+
 @synthesize preference;
 @synthesize applicationId;
 @synthesize credentialId;
+
+@synthesize openTime;
 
 + (GrowthAnalytics *) sharedInstance {
     @synchronized(self) {
@@ -148,17 +157,18 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void)open {
+    openTime = [NSDate date];
     [self track:[self generateEventId:@"Open"] option:GATrackOptionCounter];
     [self track:[self generateEventId:@"Install"] option:GATrackOptionOnce];
 }
 
 - (void)close {
-    GAClientEvent *openEvent = [GAClientEvent load:[self generateEventId:@"Open"]];
-    if(!openEvent)
+    if(!openTime)
         return;
-    NSTimeInterval interval = -1 * [[openEvent created] timeIntervalSinceNow] * 1000;
+    NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:openTime];
+    openTime = nil;
     [self track:[self generateEventId:@"Close"] properties:@{
-        @"time": [NSString stringWithFormat:@"%d", (int)interval]
+        @"time": [NSString stringWithFormat:@"%d", (int)time]
     }];
 }
 
