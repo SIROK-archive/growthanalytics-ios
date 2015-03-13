@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GrowthbeatCore.h"
+#import "GAEventHandler.h"
 
 typedef NS_ENUM (NSInteger, GATrackOption) {
     GATrackOptionDefault = 0,
@@ -32,7 +33,7 @@ typedef NS_ENUM (NSInteger, GAGender) {
 - (void)track:(NSString *)eventId option:(GATrackOption)option;
 - (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option;
 
-- (void)bindEvent:(void (^)(NSString *eventId, NSDictionary *properties))eventHandler;
+- (void)addEventHandler:(GAEventHandler *)eventHandler;
 
 - (void)tag:(NSString *)tagId;
 - (void)tag:(NSString *)tagId value:(NSString *)value;
