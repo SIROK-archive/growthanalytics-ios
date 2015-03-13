@@ -25,6 +25,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     NSString *credentialId;
     
     NSDate *openTime;
+    NSMutableArray *eventHandlers;
     
 }
 
@@ -36,6 +37,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 @property (nonatomic, strong) NSString *credentialId;
 
 @property (nonatomic, strong) NSDate *openTime;
+@property (nonatomic, strong) NSMutableArray *eventHandlers;
 
 @end
 
@@ -49,6 +51,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 @synthesize credentialId;
 
 @synthesize openTime;
+@synthesize eventHandlers;
 
 + (GrowthAnalytics *) sharedInstance {
     @synchronized(self) {
@@ -68,6 +71,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         self.logger = [[GBLogger alloc] initWithTag:kGBLoggerDefaultTag];
         self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGBHttpClientDefaultBaseUrl]];
         self.preference = [[GBPreference alloc] initWithFileName:kGBPreferenceDefaultFileName];
+        self.eventHandlers = [NSMutableArray array];
     }
     return self;
 }
@@ -122,10 +126,22 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
             [GAClientEvent save:clientEvent];
             [logger info:@"Tracking event success. (id: %@, eventId: %@, properties: %@)", clientEvent.id, eventId, processedProperties];
         }
-    
+        
+        for (GAEventHandler *eventHandler in [eventHandlers objectEnumerator]) {
+            if(eventHandler.callback)
+                eventHandler.callback(eventId, processedProperties);
+        }
+        
     });
 
 }
+
+- (void)addEventHandler:(GAEventHandler *)eventHandler {
+    
+    [eventHandlers addObject:eventHandler];
+    
+}
+
 
 - (void)tag:(NSString *)tagId {
     [self tag:tagId value:nil];
