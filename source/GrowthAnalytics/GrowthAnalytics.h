@@ -32,6 +32,8 @@ typedef NS_ENUM (NSInteger, GAGender) {
 - (void)track:(NSString *)eventId option:(GATrackOption)option;
 - (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option;
 
+- (void)bindEvent:(void (^)(NSString *eventId))eventHandler;
+
 - (void)tag:(NSString *)tagId;
 - (void)tag:(NSString *)tagId value:(NSString *)value;
 
