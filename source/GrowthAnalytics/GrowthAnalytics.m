@@ -126,12 +126,16 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
             [GAClientEvent save:clientEvent];
             [logger info:@"Tracking event success. (id: %@, eventId: %@, properties: %@)", clientEvent.id, eventId, processedProperties];
         }
-    
+        
+        for (void (^eventHandler)(NSString *eventId, NSDictionary *properties) in [eventHandlers objectEnumerator]) {
+            eventHandler(eventId, processedProperties);
+        }
+        
     });
 
 }
 
-- (void)bindEvent:(void (^)(NSString *eventId))eventHandler {
+- (void)bindEvent:(void (^)(NSString *eventId, NSDictionary *properties))eventHandler {
     
     [eventHandlers addObject:eventHandler];
     
