@@ -32,7 +32,11 @@
     }
     if (properties) {
         for (id key in [properties keyEnumerator]) {
-            [body setObject:[properties objectForKey:key] forKey:[NSString stringWithFormat:@"properties[%@]", key]];
+            id object = [properties objectForKey:key];
+            if (!object) {
+                continue;
+            }
+            [body setObject:object forKey:[NSString stringWithFormat:@"properties[%@]", key]];
         }
     }
     if (credentialId) {

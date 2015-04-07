@@ -139,9 +139,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void) addEventHandler:(GAEventHandler *)eventHandler {
-
     [eventHandlers addObject:eventHandler];
-
 }
 
 
