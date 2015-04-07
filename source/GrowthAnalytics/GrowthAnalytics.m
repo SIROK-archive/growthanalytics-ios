@@ -81,10 +81,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 - (void) initializeWithApplicationId:(NSString *)newApplicationId credentialId:(NSString *)newCredentialId {
 
     [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
-    
+
     self.applicationId = newApplicationId;
     self.credentialId = newCredentialId;
-    
+
     [self setBasicTags];
 
 }
@@ -183,22 +183,35 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void) close {
+
     if (!openTime) {
         return;
     }
+
     NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:openTime];
     openTime = nil;
-    [self track:[self generateEventId:@"Close"] properties:@{
-        @"time": [NSString stringWithFormat:@"%d", (int)time]
-    }];
+
+    NSMutableDictionary *properties = [NSMutableDictionary dictionary];
+    [properties setObject:[NSString stringWithFormat:@"%d", (int)time] forKey:@"time"];
+
+    [self track:[self generateEventId:@"Close"] properties:properties];
+
 }
 
 - (void) purchase:(int)price setCategory:(NSString *)category setProduct:(NSString *)product {
-    [self track:[self generateEventId:@"Purchase"] properties:@{
-        @"price": [NSString stringWithFormat:@"%d", price],
-        @"category": category,
-        @"product": product
-    }];
+
+    NSMutableDictionary *properties = [NSMutableDictionary dictionary];
+
+    [properties setObject:[NSString stringWithFormat:@"%d", price] forKey:@"price"];
+    if (category) {
+        [properties setObject:category forKey:@"category"];
+    }
+    if (product) {
+        [properties setObject:product forKey:@"product"];
+    }
+
+    [self track:[self generateEventId:@"Purchase"] properties:properties];
+
 }
 
 - (void) setUserId:(NSString *)userId {
@@ -260,6 +273,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 - (void) setRandom {
     double random = (double)arc4random() / ARC4RANDOM_MAX;
+
     [self tag:[self generateTagId:@"Random"] value:[NSString stringWithFormat:@"%lf", random]];
 }
 
