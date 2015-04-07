@@ -12,9 +12,9 @@
 
 @synthesize callback;
 
-- (instancetype)initWithCallback:(void (^)(NSString *eventId, NSDictionary *properties))newCallback {
+- (instancetype) initWithCallback:(void (^)(NSString *eventId, NSDictionary *properties))newCallback {
     self = [super init];
-    if(self) {
+    if (self) {
         self.callback = newCallback;
     }
     return self;

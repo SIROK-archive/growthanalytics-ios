@@ -15,27 +15,27 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [[GrowthAnalytics sharedInstance] initializeWithApplicationId:@"OyTg8vZd4KTNQDJ5" credentialId:@"3EKydeJ0imxJ5WqS22FJfdVamFLgu7XA"];
     
     [[GrowthAnalytics sharedInstance] addEventHandler:[[GAEventHandler alloc] initWithCallback:^(NSString *eventId, NSDictionary *properties) {
         NSLog(@"EventHandler called. (eventId: %@, properties: %@)", eventId, properties);
     }]];
-    
+
     ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
-    if ([identifierManager isAdvertisingTrackingEnabled])
+    if ([identifierManager isAdvertisingTrackingEnabled]) {
         [[GrowthAnalytics sharedInstance] setAdvertisingId:identifierManager.advertisingIdentifier.UUIDString];
+    }
 
     return YES;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
+- (void) applicationDidBecomeActive:(UIApplication *)application {
     [[GrowthAnalytics sharedInstance] open];
-    [[GrowthAnalytics sharedInstance] setBasicTags];
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
+- (void) applicationWillResignActive:(UIApplication *)application {
     [[GrowthAnalytics sharedInstance] close];
 }
 

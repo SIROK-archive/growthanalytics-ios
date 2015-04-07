@@ -19,11 +19,11 @@
 @synthesize properties;
 @synthesize created;
 
-+ (GAClientEvent *)createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties credentialId:(NSString *)credentialId {
-    
++ (GAClientEvent *) createWithClientId:(NSString *)clientId eventId:(NSString *)eventId properties:(NSDictionary *)properties credentialId:(NSString *)credentialId {
+
     NSString *path = @"/1/client_events";
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    
+
     if (clientId) {
         [body setObject:clientId forKey:@"clientId"];
     }
@@ -31,27 +31,31 @@
         [body setObject:eventId forKey:@"eventId"];
     }
     if (properties) {
-        for(id key in [properties keyEnumerator]) {
-            [body setObject:[properties objectForKey:key] forKey:[NSString stringWithFormat:@"properties[%@]", key]];
+        for (id key in [properties keyEnumerator]) {
+            id object = [properties objectForKey:key];
+            if (!object) {
+                continue;
+            }
+            [body setObject:object forKey:[NSString stringWithFormat:@"properties[%@]", key]];
         }
     }
     if (credentialId) {
         [body setObject:credentialId forKey:@"credentialId"];
     }
-    
+
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
     GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
-    if(!httpResponse.success){
-        [[[GrowthAnalytics sharedInstance] logger] error:@"Failed to create client event. %@", httpResponse.error?httpResponse.error:[httpResponse.body objectForKey:@"message"]];
+    if (!httpResponse.success) {
+        [[[GrowthAnalytics sharedInstance] logger] error:@"Failed to create client event. %@", httpResponse.error ? httpResponse.error : [httpResponse.body objectForKey:@"message"]];
         return nil;
     }
-    
+
     return [GAClientEvent domainWithDictionary:httpResponse.body];
 
 }
 
 + (void) save:(GAClientEvent *)clientEvent {
-    if (clientEvent && clientEvent.eventId){
+    if (clientEvent && clientEvent.eventId) {
         [[[GrowthAnalytics sharedInstance] preference] setObject:clientEvent forKey:clientEvent.eventId];
     }
 }
@@ -61,7 +65,7 @@
 }
 
 - (id) initWithDictionary:(NSDictionary *)dictionary {
-    
+
     self = [super init];
     if (self) {
         if ([dictionary objectForKey:@"id"] && [dictionary objectForKey:@"id"] != [NSNull null]) {
@@ -81,7 +85,7 @@
         }
     }
     return self;
-    
+
 }
 
 #pragma mark --
