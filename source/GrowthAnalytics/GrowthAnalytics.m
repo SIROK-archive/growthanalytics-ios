@@ -76,6 +76,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         self.logger = [[GBLogger alloc] initWithTag:kGBLoggerDefaultTag];
         self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGBHttpClientDefaultBaseUrl]];
         self.preference = [[GBPreference alloc] initWithFileName:kGBPreferenceDefaultFileName];
+        self.initialized = NO;
         self.eventHandlers = [NSMutableArray array];
     }
     return self;
@@ -87,11 +88,11 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         return;
     }
     initialized = YES;
-
-    [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
-
+    
     self.applicationId = newApplicationId;
     self.credentialId = newCredentialId;
+    
+    [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
 
     [self setBasicTags];
 
