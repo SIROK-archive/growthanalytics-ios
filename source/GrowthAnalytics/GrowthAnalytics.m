@@ -10,6 +10,8 @@
 #import "GAClientEvent.h"
 #import "GAClientTag.h"
 
+#define ARC4RANDOM_MAX (0x100000000)
+
 static GrowthAnalytics *sharedInstance = nil;
 static NSString *const kGBLoggerDefaultTag = @"GrowthAnalytics";
 static NSString *const kGBHttpClientDefaultBaseUrl = @"https://api.analytics.growthbeat.com/";
@@ -78,10 +80,12 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 - (void) initializeWithApplicationId:(NSString *)newApplicationId credentialId:(NSString *)newCredentialId {
 
+    [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
+    
     self.applicationId = newApplicationId;
     self.credentialId = newCredentialId;
-
-    [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
+    
+    [self setBasicTags];
 
 }
 
@@ -255,8 +259,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void) setRandom {
-    srand((unsigned)time(NULL));
-    double random = (double)rand() / RAND_MAX;
+    double random = (double)arc4random() / ARC4RANDOM_MAX;
     [self tag:[self generateTagId:@"Random"] value:[NSString stringWithFormat:@"%lf", random]];
 }
 
