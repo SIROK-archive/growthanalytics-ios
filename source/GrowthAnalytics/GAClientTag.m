@@ -20,11 +20,11 @@
 
 static NSString *const kGAPreferenceTagsKey = @"tags";
 
-+ (GAClientTag *)createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value credentialId:(NSString *)credentialId {
-    
++ (GAClientTag *) createWithClientId:(NSString *)clientId tagId:(NSString *)tagId value:(NSString *)value credentialId:(NSString *)credentialId {
+
     NSString *path = @"/1/client_tags";
     NSMutableDictionary *body = [NSMutableDictionary dictionary];
-    
+
     if (clientId) {
         [body setObject:clientId forKey:@"clientId"];
     }
@@ -37,14 +37,14 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
     if (credentialId) {
         [body setObject:credentialId forKey:@"credentialId"];
     }
-    
+
     GBHttpRequest *httpRequest = [GBHttpRequest instanceWithMethod:GBRequestMethodPost path:path query:nil body:body];
     GBHttpResponse *httpResponse = [[[GrowthAnalytics sharedInstance] httpClient] httpRequest:httpRequest];
-    if(!httpResponse.success){
-        [[[GrowthAnalytics sharedInstance] logger] error:@"Failed to create client tag. %@", httpResponse.error?httpResponse.error:[httpResponse.body objectForKey:@"message"]];
+    if (!httpResponse.success) {
+        [[[GrowthAnalytics sharedInstance] logger] error:@"Failed to create client tag. %@", httpResponse.error ? httpResponse.error : [httpResponse.body objectForKey:@"message"]];
         return nil;
     }
-    
+
     return [GAClientTag domainWithDictionary:httpResponse.body];
 }
 
@@ -59,7 +59,7 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
 }
 
 - (id) initWithDictionary:(NSDictionary *)dictionary {
-    
+
     self = [super init];
     if (self) {
         if ([dictionary objectForKey:@"clientId"] && [dictionary objectForKey:@"clientId"] != [NSNull null]) {
@@ -76,7 +76,7 @@ static NSString *const kGAPreferenceTagsKey = @"tags";
         }
     }
     return self;
-    
+
 }
 
 #pragma mark --

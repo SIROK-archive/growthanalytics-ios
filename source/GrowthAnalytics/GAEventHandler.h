@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface GAEventHandler : NSObject {
-    
-    void (^callback)(NSString *eventId, NSDictionary *properties);
-    
+
+    void(^ callback)(NSString * eventId, NSDictionary * properties);
+
 }
 
-@property (nonatomic, strong) void (^callback)(NSString *eventId, NSDictionary *properties);
+@property (nonatomic, strong)void(^ callback)(NSString * eventId, NSDictionary * properties);
 
-- (instancetype)initWithCallback:(void (^)(NSString *eventId, NSDictionary *properties))callback;
+- (instancetype)initWithCallback:(void(^)(NSString * eventId, NSDictionary * properties))callback;
 
 @end

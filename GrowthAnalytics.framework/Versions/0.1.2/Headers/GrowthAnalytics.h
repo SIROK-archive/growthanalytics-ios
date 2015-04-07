@@ -24,7 +24,7 @@ typedef NS_ENUM (NSInteger, GAGender) {
 
 @interface GrowthAnalytics : NSObject
 
-+ (GrowthAnalytics *) sharedInstance;
++ (GrowthAnalytics *)sharedInstance;
 
 - (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
 
