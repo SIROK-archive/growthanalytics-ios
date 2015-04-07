@@ -26,6 +26,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     NSString *applicationId;
     NSString *credentialId;
 
+    BOOL initialized;
     NSDate *openTime;
     NSMutableArray *eventHandlers;
 
@@ -38,6 +39,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 @property (nonatomic, strong) NSString *applicationId;
 @property (nonatomic, strong) NSString *credentialId;
 
+@property (nonatomic, assign) BOOL initialized;
 @property (nonatomic, strong) NSDate *openTime;
 @property (nonatomic, strong) NSMutableArray *eventHandlers;
 
@@ -52,6 +54,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 @synthesize applicationId;
 @synthesize credentialId;
 
+@synthesize initialized;
 @synthesize openTime;
 @synthesize eventHandlers;
 
@@ -79,6 +82,11 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void) initializeWithApplicationId:(NSString *)newApplicationId credentialId:(NSString *)newCredentialId {
+
+    if (initialized) {
+        return;
+    }
+    initialized = YES;
 
     [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
 
