@@ -207,11 +207,17 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     NSMutableDictionary *properties = [NSMutableDictionary dictionary];
     [properties setObject:[NSString stringWithFormat:@"%d", (int)time] forKey:@"time"];
 
-    // TODO start background task
+    UIBackgroundTaskIdentifier __block backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
+            backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        }];
 
-    [self track:[self generateEventId:@"Close"] properties:properties option:GATrackOptionDefault complete:^{
-        // TODO end background task
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self track:[self generateEventId:@"Close"] properties:properties option:GATrackOptionDefault complete:^{
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
+            backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        }];
+    });
 
 }
 
