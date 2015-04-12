@@ -88,10 +88,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         return;
     }
     initialized = YES;
-    
+
     self.applicationId = newApplicationId;
     self.credentialId = newCredentialId;
-    
+
     [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
 
     [self setBasicTags];
@@ -99,18 +99,18 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void) track:(NSString *)eventId {
-    [self track:eventId properties:nil option:GATrackOptionDefault];
+    [self track:eventId properties:nil option:GATrackOptionDefault complete:nil];
 }
 
 - (void) track:(NSString *)eventId properties:(NSDictionary *)properties {
-    [self track:eventId properties:properties option:GATrackOptionDefault];
+    [self track:eventId properties:properties option:GATrackOptionDefault complete:nil];
 }
 
 - (void) track:(NSString *)eventId option:(GATrackOption)option {
-    [self track:eventId properties:nil option:option];
+    [self track:eventId properties:nil option:option complete:nil];
 }
 
-- (void) track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option {
+- (void) track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void (^)(void))complete {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
@@ -145,6 +145,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
             if (eventHandler.callback) {
                 eventHandler.callback(eventId, processedProperties);
             }
+        }
+
+        if (complete) {
+            complete();
         }
 
     });
@@ -203,7 +207,11 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     NSMutableDictionary *properties = [NSMutableDictionary dictionary];
     [properties setObject:[NSString stringWithFormat:@"%d", (int)time] forKey:@"time"];
 
-    [self track:[self generateEventId:@"Close"] properties:properties];
+    // TODO start background task
+
+    [self track:[self generateEventId:@"Close"] properties:properties option:GATrackOptionDefault complete:^{
+        // TODO end background task
+    }];
 
 }
 
