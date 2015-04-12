@@ -110,7 +110,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     [self track:eventId properties:nil option:option complete:nil];
 }
 
-- (void) track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void (^)(void))complete {
+- (void) track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void (^)(GAClientEvent *clientEvent))complete {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
@@ -148,7 +148,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         }
 
         if (complete) {
-            complete();
+            complete(clientEvent);
         }
 
     });
@@ -161,10 +161,14 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 
 - (void) tag:(NSString *)tagId {
-    [self tag:tagId value:nil];
+    [self tag:tagId value:nil complete:nil];
 }
 
 - (void) tag:(NSString *)tagId value:(NSString *)value {
+    [self tag:tagId value:value complete:nil];
+}
+
+- (void) tag:(NSString *)tagId value:(NSString *)value complete:(void (^)(GAClientTag *clientTag))complete {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
@@ -183,6 +187,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         if (clientTag) {
             [GAClientTag save:clientTag];
             [logger info:@"Setting tag success. (tagId: %@)", tagId];
+        }
+
+        if (complete) {
+            complete(clientTag);
         }
 
     });
@@ -213,7 +221,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         }];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self track:[self generateEventId:@"Close"] properties:properties option:GATrackOptionDefault complete:^{
+        [self track:[self generateEventId:@"Close"] properties:properties option:GATrackOptionDefault complete:^(GAClientEvent *clientEvent) {
             [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
             backgroundTaskIdentifier = UIBackgroundTaskInvalid;
         }];
