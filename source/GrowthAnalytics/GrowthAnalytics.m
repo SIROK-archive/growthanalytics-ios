@@ -88,10 +88,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         return;
     }
     initialized = YES;
-    
+
     self.applicationId = newApplicationId;
     self.credentialId = newCredentialId;
-    
+
     [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
 
     [self setBasicTags];
@@ -99,18 +99,18 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void) track:(NSString *)eventId {
-    [self track:eventId properties:nil option:GATrackOptionDefault];
+    [self track:eventId properties:nil option:GATrackOptionDefault complete:nil];
 }
 
 - (void) track:(NSString *)eventId properties:(NSDictionary *)properties {
-    [self track:eventId properties:properties option:GATrackOptionDefault];
+    [self track:eventId properties:properties option:GATrackOptionDefault complete:nil];
 }
 
 - (void) track:(NSString *)eventId option:(GATrackOption)option {
-    [self track:eventId properties:nil option:option];
+    [self track:eventId properties:nil option:option complete:nil];
 }
 
-- (void) track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option {
+- (void) track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void (^)(GAClientEvent *clientEvent))complete {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
@@ -147,6 +147,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
             }
         }
 
+        if (complete) {
+            complete(clientEvent);
+        }
+
     });
 
 }
@@ -157,10 +161,14 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 
 - (void) tag:(NSString *)tagId {
-    [self tag:tagId value:nil];
+    [self tag:tagId value:nil complete:nil];
 }
 
 - (void) tag:(NSString *)tagId value:(NSString *)value {
+    [self tag:tagId value:value complete:nil];
+}
+
+- (void) tag:(NSString *)tagId value:(NSString *)value complete:(void (^)(GAClientTag *clientTag))complete {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
@@ -179,6 +187,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         if (clientTag) {
             [GAClientTag save:clientTag];
             [logger info:@"Setting tag success. (tagId: %@)", tagId];
+        }
+
+        if (complete) {
+            complete(clientTag);
         }
 
     });
@@ -203,7 +215,17 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     NSMutableDictionary *properties = [NSMutableDictionary dictionary];
     [properties setObject:[NSString stringWithFormat:@"%d", (int)time] forKey:@"time"];
 
-    [self track:[self generateEventId:@"Close"] properties:properties];
+    UIBackgroundTaskIdentifier __block backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
+            backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        }];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self track:[self generateEventId:@"Close"] properties:properties option:GATrackOptionDefault complete:^(GAClientEvent *clientEvent) {
+            [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
+            backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        }];
+    });
 
 }
 
