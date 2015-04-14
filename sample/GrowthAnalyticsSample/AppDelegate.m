@@ -23,11 +23,6 @@
         NSLog(@"EventHandler called. (eventId: %@, properties: %@)", eventId, properties);
     }]];
 
-    ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
-    if ([identifierManager isAdvertisingTrackingEnabled]) {
-        [[GrowthAnalytics sharedInstance] setAdvertisingId:identifierManager.advertisingIdentifier.UUIDString];
-    }
-
     return YES;
 }
 
