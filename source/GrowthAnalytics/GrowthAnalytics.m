@@ -9,6 +9,7 @@
 #import "GrowthAnalytics.h"
 #import "GAClientEvent.h"
 #import "GAClientTag.h"
+#import <AdSupport/AdSupport.h>
 
 #define ARC4RANDOM_MAX (0x100000000)
 
@@ -308,8 +309,11 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     [self tag:[self generateTagId:@"Random"] value:[NSString stringWithFormat:@"%lf", random]];
 }
 
-- (void) setAdvertisingId:(NSString *)idfa {
-    [self tag:[self generateTagId:@"AdvertisingID"] value:idfa];
+- (void) setAdvertisingId {
+    ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
+    if ([identifierManager isAdvertisingTrackingEnabled]) {
+        [self tag:[self generateTagId:@"AdvertisingID"] value:identifierManager.advertisingIdentifier.UUIDString];
+    }
 }
 
 - (void) setBasicTags {
@@ -319,6 +323,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     [self setTimeZone];
     [self setTimeZoneOffset];
     [self setAppVersion];
+    [self setAdvertisingId];
 }
 
 - (NSString *) generateEventId:(NSString *)name {
