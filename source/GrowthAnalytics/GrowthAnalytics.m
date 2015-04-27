@@ -330,8 +330,16 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     return [NSString stringWithFormat:@"Event:%@:Default:%@", applicationId, name];
 }
 
+- (NSString *) generateCustomEventId:(NSString *)lastId {
+    return [NSString stringWithFormat:@"Event:%@:Custom:%@", applicationId, lastId];
+}
+
 - (NSString *) generateTagId:(NSString *)name {
     return [NSString stringWithFormat:@"Tag:%@:Default:%@", applicationId, name];
+}
+
+- (NSString *) generateCustomTagId:(NSString *)lastId {
+    return [NSString stringWithFormat:@"Tag:%@:Custom:%@", applicationId, lastId];
 }
 
 @end
