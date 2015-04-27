@@ -45,6 +45,8 @@ typedef NS_ENUM (NSInteger, GAGender) {
 - (void)tag:(NSString *)tagId;
 - (void)tag:(NSString *)tagId value:(NSString *)value;
 - (void)tag:(NSString *)tagId value:(NSString *)value complete:(void(^)(GAClientTag * clientTag))complete;
+
+- (void)customTag:(NSString *)lastId;
 - (void)customTag:(NSString *)lastId value:(NSString *)value;
 
 - (void)open;

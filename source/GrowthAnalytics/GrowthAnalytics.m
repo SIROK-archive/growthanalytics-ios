@@ -212,6 +212,9 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 }
 
+- (void) tagCustom:(NSString *)lastId {
+    [self tag:[self generateCustomTagId:lastId]];
+}
 - (void) tagCustom:(NSString *)lastId value:(NSString *)value {
     [self tag:[self generateCustomTagId:lastId] value:value];
 }
