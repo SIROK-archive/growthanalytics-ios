@@ -35,10 +35,10 @@ typedef NS_ENUM (NSInteger, GAGender) {
 - (void)track:(NSString *)eventId option:(GATrackOption)option;
 - (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void(^)(GAClientEvent * clientEvent))complete;
 
-- (void)customTrack:(NSString *)lastId;
-- (void)customTrack:(NSString *)lastId properties:(NSDictionary *)properties;
-- (void)custonTrack:(NSString *)lastId option:(GATrackOption)option;
-- (void)customTrack:(NSString *)lastId properties:(NSDictionary *)properties option:(GATrackOption)option;
+- (void)trackCustom:(NSString *)lastId;
+- (void)trackCustom:(NSString *)lastId properties:(NSDictionary *)properties;
+- (void)trackCustom:(NSString *)lastId option:(GATrackOption)option;
+- (void)trackCustom:(NSString *)lastId properties:(NSDictionary *)properties option:(GATrackOption)option;
 
 - (void)addEventHandler:(GAEventHandler *)eventHandler;
 
