@@ -198,6 +198,10 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 }
 
+- (void) tagCustom:(NSString *)lastId value:(NSString *)value {
+    [self tag:[self generateCustomTagId:lastId] value:value];
+}
+
 - (void) open {
     openTime = [NSDate date];
     [self track:[self generateEventId:@"Open"] option:GATrackOptionCounter];
