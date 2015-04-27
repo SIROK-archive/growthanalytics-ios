@@ -156,6 +156,20 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 }
 
+- (void)customTrack:(NSString *)lastId {
+    [self track:[self generateCustomEventId:lastId]];
+}
+- (void)customTrack:(NSString *)lastId properties:(NSDictionary *)properties {
+    [self track:[self generateCustomEventId:lastId] properties:properties];
+}
+- (void)custonTrack:(NSString *)lastId option:(GATrackOption)option {
+    [self track:[self generateCustomEventId:lastId] option:option];
+}
+- (void)customTrack:(NSString *)lastId properties:(NSDictionary *)properties option:(GATrackOption)option {
+    [self track:[self generateCustomEventId:lastId] properties:properties option:option complete:nil];
+}
+
+
 - (void) addEventHandler:(GAEventHandler *)eventHandler {
     [eventHandlers addObject:eventHandler];
 }
