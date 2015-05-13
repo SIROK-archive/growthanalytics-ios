@@ -30,16 +30,23 @@ typedef NS_ENUM (NSInteger, GAGender) {
 
 - (void)initializeWithApplicationId:(NSString *)applicationId credentialId:(NSString *)credentialId;
 
-- (void)track:(NSString *)eventId;
-- (void)track:(NSString *)eventId properties:(NSDictionary *)properties;
-- (void)track:(NSString *)eventId option:(GATrackOption)option;
-- (void)track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void(^)(GAClientEvent * clientEvent))complete;
+- (void)track:(NSString *)namespace eventId:(NSString *)eventId;
+- (void)track:(NSString *)namespace eventId:(NSString *)eventId properties:(NSDictionary *)properties;
+- (void)track:(NSString *)namespace eventId:(NSString *)eventId option:(GATrackOption)option;
+- (void)track:(NSString *)namespace eventId:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void(^)(GAClientEvent * clientEvent))complete;
+
+- (void)track:(NSString *)lastId;
+- (void)track:(NSString *)lastId properties:(NSDictionary *)properties;
+- (void)track:(NSString *)lastId option:(GATrackOption)option;
+- (void)track:(NSString *)lastId properties:(NSDictionary *)properties option:(GATrackOption)option;
 
 - (void)addEventHandler:(GAEventHandler *)eventHandler;
 
-- (void)tag:(NSString *)tagId;
-- (void)tag:(NSString *)tagId value:(NSString *)value;
-- (void)tag:(NSString *)tagId value:(NSString *)value complete:(void(^)(GAClientTag * clientTag))complete;
+- (void)tag:(NSString *)namespace tagId:(NSString *)tagId value:(NSString *)value;
+- (void)tag:(NSString *)namespace tagId:(NSString *)tagId value:(NSString *)value complete:(void(^)(GAClientTag * clientTag))complete;
+
+- (void)tag:(NSString *)lastId;
+- (void)tag:(NSString *)lastId value:(NSString *)value;
 
 - (void)open;
 - (void)close;
