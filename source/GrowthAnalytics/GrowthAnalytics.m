@@ -98,7 +98,7 @@ static NSString *const kGACustomNamespace = @"Custom";
     self.credentialId = newCredentialId;
 
     [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
-    if(![[GrowthbeatCore sharedInstance] client] || ![[[[[GrowthbeatCore sharedInstance] client] application] id] isEqualToString:applicationId]) {
+    if (![[GrowthbeatCore sharedInstance] client] || ![[[[[GrowthbeatCore sharedInstance] client] application] id] isEqualToString:applicationId]) {
         [preference removeAll];
     }
 
@@ -332,6 +332,12 @@ static NSString *const kGACustomNamespace = @"Custom";
     }
 }
 
+- (void) setTrackingEnabled {
+    ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
+
+    [self tag:kGADefaultNamespace name:@"TrackingEnabled" value:[identifierManager isAdvertisingTrackingEnabled] ? @"true" : @"false" completion:nil];
+}
+
 - (void) setBasicTags {
     [self setDeviceModel];
     [self setOS];
@@ -340,6 +346,7 @@ static NSString *const kGACustomNamespace = @"Custom";
     [self setTimeZoneOffset];
     [self setAppVersion];
     [self setAdvertisingId];
+    [self setTrackingEnabled];
 }
 
 - (NSString *) generateEventIdWithNamespace:(NSString *)namespace name:(NSString *)name {

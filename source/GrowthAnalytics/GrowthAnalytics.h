@@ -60,6 +60,7 @@ typedef NS_ENUM (NSInteger, GAGender) {
 - (void)setAppVersion;
 - (void)setRandom;
 - (void)setAdvertisingId;
+- (void)setTrackingEnabled;
 - (void)setBasicTags;
 
 - (GBLogger *)logger;
