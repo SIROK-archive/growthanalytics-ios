@@ -16,6 +16,7 @@
 static GrowthAnalytics *sharedInstance = nil;
 static NSString *const kGBLoggerDefaultTag = @"GrowthAnalytics";
 static NSString *const kGBHttpClientDefaultBaseUrl = @"https://api.analytics.growthbeat.com/";
+static NSTimeInterval const kGBHttpClientDefaultTimeout = 60;
 static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferences";
 
 static NSString *const kGADefaultNamespace = @"Default";
@@ -78,7 +79,7 @@ static NSString *const kGACustomNamespace = @"Custom";
     self = [super init];
     if (self) {
         self.logger = [[GBLogger alloc] initWithTag:kGBLoggerDefaultTag];
-        self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGBHttpClientDefaultBaseUrl]];
+        self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGBHttpClientDefaultBaseUrl] timeout:kGBHttpClientDefaultTimeout];
         self.preference = [[GBPreference alloc] initWithFileName:kGBPreferenceDefaultFileName];
         self.initialized = NO;
         self.eventHandlers = [NSMutableArray array];
