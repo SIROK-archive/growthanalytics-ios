@@ -98,6 +98,9 @@ static NSString *const kGACustomNamespace = @"Custom";
     self.credentialId = newCredentialId;
 
     [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
+    if(![[GrowthbeatCore sharedInstance] client] || ![[[[[GrowthbeatCore sharedInstance] client] application] id] isEqualToString:applicationId]) {
+        [preference removeAll];
+    }
 
     [self setBasicTags];
 
