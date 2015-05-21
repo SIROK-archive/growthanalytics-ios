@@ -18,6 +18,9 @@ static NSString *const kGBLoggerDefaultTag = @"GrowthAnalytics";
 static NSString *const kGBHttpClientDefaultBaseUrl = @"https://api.analytics.growthbeat.com/";
 static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferences";
 
+static NSString *const kGADefaultNamespace = @"Default";
+static NSString *const kGACustomNamespace = @"Custom";
+
 @interface GrowthAnalytics () {
 
     GBLogger *logger;
@@ -99,22 +102,28 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 
 }
 
-- (void) track:(NSString *)eventId {
-    [self track:eventId properties:nil option:GATrackOptionDefault complete:nil];
+- (void) track:(NSString *)name {
+    [self track:kGACustomNamespace name:name properties:nil option:GATrackOptionDefault completion:nil];
 }
 
-- (void) track:(NSString *)eventId properties:(NSDictionary *)properties {
-    [self track:eventId properties:properties option:GATrackOptionDefault complete:nil];
+- (void) track:(NSString *)name properties:(NSDictionary *)properties {
+    [self track:kGACustomNamespace name:name properties:properties option:GATrackOptionDefault completion:nil];
 }
 
-- (void) track:(NSString *)eventId option:(GATrackOption)option {
-    [self track:eventId properties:nil option:option complete:nil];
+- (void) track:(NSString *)name option:(GATrackOption)option {
+    [self track:kGACustomNamespace name:name properties:nil option:option completion:nil];
 }
 
-- (void) track:(NSString *)eventId properties:(NSDictionary *)properties option:(GATrackOption)option complete:(void (^)(GAClientEvent *clientEvent))complete {
+- (void) track:(NSString *)name properties:(NSDictionary *)properties option:(GATrackOption)option {
+    [self track:kGACustomNamespace name:name properties:properties option:option completion:nil];
+}
+
+- (void) track:(NSString *)namespace name:(NSString *)name properties:(NSDictionary *)properties option:(GATrackOption)option completion:(void (^)(GAClientEvent *clientEvent))completion {
+
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
+        NSString *eventId = [self generateEventIdWithNamespace:namespace name:name];
         [logger info:@"Track event... (eventId: %@)", eventId];
 
         NSMutableDictionary *processedProperties = [NSMutableDictionary dictionaryWithDictionary:properties];
@@ -148,8 +157,8 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
             }
         }
 
-        if (complete) {
-            complete(clientEvent);
+        if (completion) {
+            completion(clientEvent);
         }
 
     });
@@ -160,18 +169,19 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     [eventHandlers addObject:eventHandler];
 }
 
-
-- (void) tag:(NSString *)tagId {
-    [self tag:tagId value:nil complete:nil];
+- (void) tag:(NSString *)name {
+    [self tag:kGACustomNamespace name:name value:nil completion:nil];
 }
 
-- (void) tag:(NSString *)tagId value:(NSString *)value {
-    [self tag:tagId value:value complete:nil];
+- (void) tag:(NSString *)name value:(NSString *)value {
+    [self tag:kGACustomNamespace name:name value:value completion:nil];
 }
 
-- (void) tag:(NSString *)tagId value:(NSString *)value complete:(void (^)(GAClientTag *clientTag))complete {
+- (void) tag:(NSString *)namespace name:(NSString *)name value:(NSString *)value completion:(void (^)(GAClientTag *clientTag))completion {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+
+        NSString *tagId = [self generateTagIdWithNamespace:namespace name:name];
 
         [logger info:@"Set tag... (tagId: %@, value: %@)", tagId, value];
 
@@ -190,18 +200,19 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
             [logger info:@"Setting tag success. (tagId: %@)", tagId];
         }
 
-        if (complete) {
-            complete(clientTag);
+        if (completion) {
+            completion(clientTag);
         }
 
     });
 
 }
 
+
 - (void) open {
     openTime = [NSDate date];
-    [self track:[self generateEventId:@"Open"] option:GATrackOptionCounter];
-    [self track:[self generateEventId:@"Install"] option:GATrackOptionOnce];
+    [self track:kGADefaultNamespace name:@"Open" properties:nil option:GATrackOptionCounter completion:nil];
+    [self track:kGADefaultNamespace name:@"Install" properties:nil option:GATrackOptionOnce completion:nil];
 }
 
 - (void) close {
@@ -222,7 +233,7 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         }];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self track:[self generateEventId:@"Close"] properties:properties option:GATrackOptionDefault complete:^(GAClientEvent *clientEvent) {
+        [self track:kGADefaultNamespace name:@"Close" properties:properties option:GATrackOptionDefault completion:^(GAClientEvent *clientEvent) {
             [[UIApplication sharedApplication] endBackgroundTask:backgroundTaskIdentifier];
             backgroundTaskIdentifier = UIBackgroundTaskInvalid;
         }];
@@ -242,29 +253,29 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
         [properties setObject:product forKey:@"product"];
     }
 
-    [self track:[self generateEventId:@"Purchase"] properties:properties];
+    [self track:kGADefaultNamespace name:@"Purchase" properties:properties option:GATrackOptionDefault completion:nil];
 
 }
 
 - (void) setUserId:(NSString *)userId {
-    [self tag:[self generateTagId:@"UserId"] value:userId];
+    [self tag:kGADefaultNamespace name:@"UserId" value:userId completion:nil];
 }
 
 - (void) setName:(NSString *)name {
-    [self tag:[self generateTagId:@"Name"] value:name];
+    [self tag:kGADefaultNamespace name:@"Name" value:name completion:nil];
 }
 
 - (void) setAge:(int)age {
-    [self tag:[self generateTagId:@"Age"] value:[NSString stringWithFormat:@"%d", age]];
+    [self tag:kGADefaultNamespace name:@"Age" value:[NSString stringWithFormat:@"%d", age] completion:nil];
 }
 
 - (void) setGender:(GAGender)gender {
     switch (gender) {
         case GAGenderMale:
-            [self tag:[self generateTagId:@"Gender"] value:@"male"];
+            [self tag:kGADefaultNamespace name:@"Gender" value:@"male" completion:nil];
             break;
         case GAGenderFemale:
-            [self tag:[self generateTagId:@"Gender"] value:@"female"];
+            [self tag:kGADefaultNamespace name:@"Gender" value:@"female" completion:nil];
             break;
         default:
             break;
@@ -272,47 +283,48 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
 }
 
 - (void) setLevel:(int)level {
-    [self tag:[self generateTagId:@"Level"] value:[NSString stringWithFormat:@"%d", level]];
+    [self tag:kGADefaultNamespace name:@"Level" value:[NSString stringWithFormat:@"%d", level] completion:nil];
 }
 
 - (void) setDevelopment:(BOOL)development {
-    [self tag:[self generateTagId:@"Development"] value:development ? @"true" : @"false"];
+    [self tag:kGADefaultNamespace name:@"Development" value:development ? @"true" : @"false" completion:nil];
 }
 
 - (void) setDeviceModel {
-    [self tag:[self generateTagId:@"DeviceModel"] value:[GBDeviceUtils model]];
+    [self tag:kGADefaultNamespace name:@"DeviceModel" value:[GBDeviceUtils model] completion:nil];
 }
 
 - (void) setOS {
-    [self tag:[self generateTagId:@"OS"] value:[GBDeviceUtils os]];
+    [self tag:kGADefaultNamespace name:@"OS" value:[GBDeviceUtils os] completion:nil];
 }
 
 - (void) setLanguage {
-    [self tag:[self generateTagId:@"Language"] value:[GBDeviceUtils language]];
+    [self tag:kGADefaultNamespace name:@"Language" value:[GBDeviceUtils language] completion:nil];
 }
 
 - (void) setTimeZone {
-    [self tag:[self generateTagId:@"TimeZone"] value:[GBDeviceUtils timeZone]];
+    [self tag:kGADefaultNamespace name:@"TimeZone" value:[GBDeviceUtils timeZone] completion:nil];
 }
 
 - (void) setTimeZoneOffset {
-    [self tag:[self generateTagId:@"TimeZoneOffset"] value:[NSString stringWithFormat:@"%ld", (long)[GBDeviceUtils timeZoneOffset]]];
+    [self tag:kGADefaultNamespace name:@"TimeZoneOffset" value:[NSString stringWithFormat:@"%ld", (long)[GBDeviceUtils timeZoneOffset]] completion:nil];
 }
 
 - (void) setAppVersion {
-    [self tag:[self generateTagId:@"AppVersion"] value:[GBDeviceUtils version]];
+    [self tag:kGADefaultNamespace name:@"AppVersion" value:[GBDeviceUtils version] completion:nil];
 }
 
 - (void) setRandom {
     double random = (double)arc4random() / ARC4RANDOM_MAX;
 
-    [self tag:[self generateTagId:@"Random"] value:[NSString stringWithFormat:@"%lf", random]];
+    [self tag:kGADefaultNamespace name:@"Random" value:[NSString stringWithFormat:@"%lf", random] completion:nil];
 }
 
 - (void) setAdvertisingId {
     ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
+
     if ([identifierManager isAdvertisingTrackingEnabled]) {
-        [self tag:[self generateTagId:@"AdvertisingID"] value:identifierManager.advertisingIdentifier.UUIDString];
+        [self tag:kGADefaultNamespace name:@"AdvertisingID" value:identifierManager.advertisingIdentifier.UUIDString completion:nil];
     }
 }
 
@@ -326,12 +338,12 @@ static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferen
     [self setAdvertisingId];
 }
 
-- (NSString *) generateEventId:(NSString *)name {
-    return [NSString stringWithFormat:@"Event:%@:Default:%@", applicationId, name];
+- (NSString *) generateEventIdWithNamespace:(NSString *)namespace name:(NSString *)name {
+    return [NSString stringWithFormat:@"Event:%@:%@:%@", applicationId, namespace, name];
 }
 
-- (NSString *) generateTagId:(NSString *)name {
-    return [NSString stringWithFormat:@"Tag:%@:Default:%@", applicationId, name];
+- (NSString *) generateTagIdWithNamespace:(NSString *)namespace name:(NSString *)name {
+    return [NSString stringWithFormat:@"Tag:%@:%@:%@", applicationId, namespace, name];
 }
 
 @end
