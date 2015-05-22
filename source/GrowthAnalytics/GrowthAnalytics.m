@@ -16,6 +16,7 @@
 static GrowthAnalytics *sharedInstance = nil;
 static NSString *const kGBLoggerDefaultTag = @"GrowthAnalytics";
 static NSString *const kGBHttpClientDefaultBaseUrl = @"https://api.analytics.growthbeat.com/";
+static NSTimeInterval const kGBHttpClientDefaultTimeout = 60;
 static NSString *const kGBPreferenceDefaultFileName = @"growthanalytics-preferences";
 
 static NSString *const kGADefaultNamespace = @"Default";
@@ -78,7 +79,7 @@ static NSString *const kGACustomNamespace = @"Custom";
     self = [super init];
     if (self) {
         self.logger = [[GBLogger alloc] initWithTag:kGBLoggerDefaultTag];
-        self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGBHttpClientDefaultBaseUrl]];
+        self.httpClient = [[GBHttpClient alloc] initWithBaseUrl:[NSURL URLWithString:kGBHttpClientDefaultBaseUrl] timeout:kGBHttpClientDefaultTimeout];
         self.preference = [[GBPreference alloc] initWithFileName:kGBPreferenceDefaultFileName];
         self.initialized = NO;
         self.eventHandlers = [NSMutableArray array];
@@ -97,6 +98,9 @@ static NSString *const kGACustomNamespace = @"Custom";
     self.credentialId = newCredentialId;
 
     [[GrowthbeatCore sharedInstance] initializeWithApplicationId:applicationId credentialId:credentialId];
+    if (![[GrowthbeatCore sharedInstance] client] || ![[[[[GrowthbeatCore sharedInstance] client] application] id] isEqualToString:applicationId]) {
+        [preference removeAll];
+    }
 
     [self setBasicTags];
 
@@ -328,6 +332,12 @@ static NSString *const kGACustomNamespace = @"Custom";
     }
 }
 
+- (void) setTrackingEnabled {
+    ASIdentifierManager *identifierManager = [ASIdentifierManager sharedManager];
+
+    [self tag:kGADefaultNamespace name:@"TrackingEnabled" value:[identifierManager isAdvertisingTrackingEnabled] ? @"true" : @"false" completion:nil];
+}
+
 - (void) setBasicTags {
     [self setDeviceModel];
     [self setOS];
@@ -336,6 +346,7 @@ static NSString *const kGACustomNamespace = @"Custom";
     [self setTimeZoneOffset];
     [self setAppVersion];
     [self setAdvertisingId];
+    [self setTrackingEnabled];
 }
 
 - (NSString *) generateEventIdWithNamespace:(NSString *)namespace name:(NSString *)name {

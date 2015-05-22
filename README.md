@@ -23,8 +23,8 @@
 1. Write following code in AppDelegate's applicationDidBecomeActive:
 
 	```objc
-    [[GrowthAnalytics sharedInstance] open];
-    [[GrowthAnalytics sharedInstance] setBasicTags];
+	[[GrowthAnalytics sharedInstance] open];
+	[[GrowthAnalytics sharedInstance] setBasicTags];
 	```
 
 1. Write following code in AppDelegate's applicationWillResignActive:
@@ -33,6 +33,18 @@
 	[[GrowthAnalytics sharedInstance] close];
 	```
 
+1. You can track custom event with following code.
+
+	```objc
+	[[GrowthAnalytics sharedInstance] track:@"EVENT_NAME" properties:ADDITIONAL_PROPERTIES];
+	```
+
+1. You can set custom tag with following code.
+
+	```objc
+	[[GrowthAnalytics sharedInstance] tag:@"TAG_NAME" value:@"TAG_VALUE"];
+	```
+	
 ## Growthbeat Full SDK
 
 You can use Growthbeat SDK instead of this SDK. Growthbeat is growth hack tool for mobile apps. You can use full functions include Growth Push when you use the following SDK.
